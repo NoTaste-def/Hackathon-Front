@@ -20,7 +20,7 @@ import 샐러드 from "../image/btn/샐러드 먹기.png";
 import 생선 from "../image/btn/생선 먹기.png";
 
 const URL =
-  "https://port-0-thebeautyofslow-lxmynpl6f586b2fd.sel5.cloudtype.app/";
+  "https://port-0-likelion-hackathon-lxmynpl6f586b2fd.sel5.cloudtype.app";
 
 const data = [
   { name: "물 8컵 마시기", img: 물 },
