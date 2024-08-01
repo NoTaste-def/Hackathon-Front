@@ -46,7 +46,7 @@ const AuthModal = ({
           },
           {
             withCredentials: true,
-            headers: { "X-CSRFToken": token },
+            headers: { "X-CSRFToken": csrfToken, Accept: "application/json" },
           }
         );
 
