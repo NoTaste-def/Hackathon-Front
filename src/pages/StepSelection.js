@@ -18,7 +18,6 @@ import 발효식품 from "../image/btn/발효식품 먹기.png";
 import 식사 from "../image/btn/아침 식사하기.png";
 import 샐러드 from "../image/btn/샐러드 먹기.png";
 import 생선 from "../image/btn/생선 먹기.png";
-import getCsrfToken from "../components/getCsrfToken";
 
 const URL =
   "https://port-0-likelion-hackathon-lxmynpl6f586b2fd.sel5.cloudtype.app";
@@ -41,7 +40,7 @@ const data = [
   { name: "마사지 받기", img: null },
 ];
 
-const StepSelection = ({ selec, setSelec }) => {
+const StepSelection = ({ selec, setSelec, csrfToken }) => {
   const navigate = useNavigate();
 
   const handleClick = (name) => {
@@ -62,8 +61,6 @@ const StepSelection = ({ selec, setSelec }) => {
 
   const handleSubmit = async () => {
     try {
-      const csrfToken = await getCsrfToken();
-
       await axios.post(
         `${URL}/save-user-todo/`,
         { user_todo: selec },

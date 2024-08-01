@@ -29,7 +29,7 @@ import "./MonthlyStat.css";
 import "./Monthly/top.css";
 import "./Monthly/calendar_img.css";
 
-const MonthlyStat = () => {
+const MonthlyStat = ({ csrfToken }) => {
   const todos = {
     "2024-07-30": 100,
     "2024-07-15": 50,
