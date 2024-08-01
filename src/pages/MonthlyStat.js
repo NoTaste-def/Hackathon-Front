@@ -15,7 +15,7 @@ import 목욕 from "../image/btn/목욕하기.png";
 import 물 from "../image/btn/물 8컵 마시기.png";
 import 스트레칭 from "../image/btn/스트레칭 하기.png";
 import 단백질 from "../image/btn/단백질 먹기.png";
-import 발효식품 from "../image/btn/발표식품 먹기.png";
+import 발효식품 from "../image/btn/발효식품 먹기.png";
 import 식사 from "../image/btn/아침 식사하기.png";
 import 샐러드 from "../image/btn/샐러드 먹기.png";
 import 마사지 from "../image/btn/생선 먹기.png";
