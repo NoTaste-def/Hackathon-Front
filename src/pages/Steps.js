@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EmptyBtn from "../components/EmptyBtn";
 import PlusBtn from "../components/PlusBtn";
 import TodoBtn from "../components/TodoBtn";
 import style from "./Steps.module.css";
+import axios from "axios";
 
 // 빈칸을 나타낼 리스트, 이미 선택된 항목에 대한 리스트를 적절히 활용.
 // 선택 항목 리스트
@@ -14,11 +15,31 @@ import style from "./Steps.module.css";
 const selected = [];
 const empty = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
-const Steps = ({ selec }) => {
+const URL =
+  "https://port-0-likelion-hackathon-lxmynpl6f586b2fd.sel5.cloudtype.app";
+
+const Steps = ({ selec, csrfToken }) => {
   const [isOn, setIsOn] = useState(false);
+  const [data, setData] = useState();
+
   const handleClick = () => {
     setIsOn(true);
   };
+
+  useEffect(() => {
+    axios
+      .get(`${URL}/read-user-todo/`, {
+        withCredentials: true,
+        headers: { "X-CSRFToken": csrfToken, Accept: "application/json" },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setData(res.data);
+      })
+      .catch((e) => {
+        console.log("err", e);
+      });
+  }, []);
 
   return (
     <div className={style.flex_wrapper}>

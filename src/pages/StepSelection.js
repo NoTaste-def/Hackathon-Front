@@ -66,11 +66,11 @@ const StepSelection = ({ selec, setSelec, csrfToken }) => {
         { user_todo: selec },
         {
           withCredentials: true,
-          headers: { "X-CSRFToken": csrfToken },
-          Accept: "application/json",
+          headers: { "X-CSRFToken": csrfToken, Accept: "application/json" },
         }
       );
       console.log("Data saved successfully.");
+      console.log(csrfToken);
     } catch (error) {
       console.error("Error saving data:", error);
     }
