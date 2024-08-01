@@ -42,21 +42,6 @@ const data = [
 
 const StepSelection = ({ selec, setSelec }) => {
   const navigate = useNavigate();
-  const [csrfToken, setCsrfToken] = useState("");
-
-  useEffect(() => {
-    // CSRF 토큰을 가져오는 함수
-    const fetchCsrfToken = async () => {
-      try {
-        const response = await axios.get(`${URL}get-csrf-token/`);
-        setCsrfToken(response.data.csrfToken);
-      } catch (error) {
-        console.error("Error fetching CSRF token:", error);
-      }
-    };
-
-    fetchCsrfToken();
-  }, []);
 
   const handleClick = (name) => {
     setSelec((prev) => {
@@ -76,15 +61,7 @@ const StepSelection = ({ selec, setSelec }) => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post(
-        `${URL}save-user-todo/`,
-        { user_todo: selec },
-        {
-          headers: {
-            "X-CSRFToken": csrfToken,
-          },
-        }
-      );
+      await axios.post(`${URL}save-user-todo/`, { user_todo: selec });
       console.log("Data saved successfully.");
     } catch (error) {
       console.error("Error saving data:", error);

@@ -46,11 +46,7 @@ const AuthModal = ({
           nickname,
           title,
           user_email,
-          csrfToken,
         } = response.data;
-
-        // CSRF 토큰 설정
-        axios.defaults.headers.post["X-CSRFToken"] = csrfToken;
 
         // 로그인 성공 알림
         alert("로그인 성공!");
