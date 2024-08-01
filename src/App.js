@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import "./App.css";
-
 import "./font.css";
 import "./header.css";
 import "./footer.css";
@@ -18,6 +17,7 @@ import Steps from "./pages/Steps";
 import StepSelection from "./pages/StepSelection";
 import SelectionConfirmModal from "./components/SelectionConfirmModal";
 import TodoBtn from "./components/TodoBtn";
+import getCsrfToken from "./components/getCsrfToken";
 
 const App = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -34,7 +34,7 @@ const App = () => {
 
   const [selec, setSelec] = useState([]);
 
-  const [csrfToken, setCsrfToken] = useState(null); // CSRF 토큰 상태
+  const [csrfToken, setCsrfToken] = useState(null);
 
   const openLoginModal = () => setIsLoginModalOpen(true);
   const closeLoginModal = () => {
@@ -62,10 +62,8 @@ const App = () => {
     const { badges, level, login_at, message, nickname, title, user_email } =
       userData;
 
-    // 로그인 성공 알림
     alert(`${nickname}님 환영합니다`);
 
-    // 상태 업데이트
     setIsLoggedIn(true);
     setUserProfile({
       user_email,
@@ -76,7 +74,6 @@ const App = () => {
       login_at,
     });
 
-    // 로그인 모달 닫기
     closeLoginModal();
   };
 
@@ -90,6 +87,15 @@ const App = () => {
     setUserProfile(null);
     alert("로그아웃 되었습니다.");
   };
+
+  const fetchCsrfToken = async () => {
+    const token = await getCsrfToken();
+    setCsrfToken(token);
+  };
+
+  useEffect(() => {
+    fetchCsrfToken();
+  }, []);
 
   return (
     <div className="app">

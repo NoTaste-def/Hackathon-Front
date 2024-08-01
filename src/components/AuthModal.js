@@ -24,7 +24,7 @@ const AuthModal = ({
   csrfToken,
   setCsrfToken,
 }) => {
-  const [isSubmitting, setIsSubmitting] = useState(false); // 추가된 상태
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (!isOpen) return null;
 
@@ -32,12 +32,9 @@ const AuthModal = ({
     e.preventDefault();
 
     if (type === "login") {
-      setIsSubmitting(true); // 요청 시작 시 버튼 비활성화
+      setIsSubmitting(true);
 
       try {
-        const token = await getCsrfToken(); // CSRF 토큰 가져오기
-        setCsrfToken(token); // CSRF 토큰 상태에 저장
-
         const response = await axios.post(
           `${URL}/login/`,
           {
@@ -50,7 +47,6 @@ const AuthModal = ({
           }
         );
 
-        // 서버 응답 데이터 추출
         const {
           badges,
           level,
@@ -61,10 +57,8 @@ const AuthModal = ({
           user_email,
         } = response.data;
 
-        // 로그인 성공 알림
         alert("로그인 성공!");
 
-        // 상태를 부모 컴포넌트에 전달
         handleSubmit({
           badges,
           level,
@@ -81,15 +75,19 @@ const AuthModal = ({
         } else {
           console.error("요청 오류:", error.message);
         }
+        if (error.response && error.response.status === 403) {
+          const newToken = await getCsrfToken();
+          setCsrfToken(newToken);
+        }
       } finally {
-        setIsSubmitting(false); // 요청 완료 후 버튼 활성화
+        setIsSubmitting(false);
       }
     } else if (type === "signup") {
       if (password !== passwordConfirm) {
         alert("비밀번호가 일치하지 않습니다.");
         return;
       }
-      setIsSubmitting(true); // 요청 시작 시 버튼 비활성화
+      setIsSubmitting(true);
 
       try {
         const response = await axios.post(`${URL}/register/`, {
@@ -107,7 +105,7 @@ const AuthModal = ({
           console.error("요청 오류:", error.message);
         }
       } finally {
-        setIsSubmitting(false); // 요청 완료 후 버튼 활성화
+        setIsSubmitting(false);
       }
     }
   };
@@ -123,102 +121,72 @@ const AuthModal = ({
         >
           x
         </button>
-        <h2>{type === "login" ? "회원 로그인" : "회원가입"}</h2>
-        <form onSubmit={handleFormSubmit} className="form_container">
-          {type === "login" && (
-            <>
-              <div className="Login_Container">아이디</div>
-              <input
-                type="email"
-                value={email}
-                onChange={handleEmailChange}
-                placeholder="이메일 주소 입력"
-                className="Login_font"
-              />
-
-              <div className="Login_Container">비밀번호</div>
-              <input
-                type="password"
-                value={password}
-                onChange={handlePasswordChange}
-                placeholder="영문,숫자 조합 15자 이내 비밀번호"
-                maxLength={15}
-                className="Login_font"
-              />
-              <span className="char_count pw login">{password.length}/15</span>
-            </>
-          )}
+        <h2>{type === "login" ? "로그인" : "회원가입"}</h2>
+        <form onSubmit={handleFormSubmit}>
+          <div className="form-group">
+            <label htmlFor="email">이메일:</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={handleEmailChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">비밀번호:</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={handlePasswordChange}
+              required
+            />
+          </div>
           {type === "signup" && (
             <>
-              <div className="Login_Container">아이디</div>
-              <input
-                type="email"
-                value={email}
-                onChange={handleEmailChange}
-                placeholder="이메일 주소 입력"
-                className="Login_font"
-              />
-
-              <div className="Login_Container">비밀번호</div>
-              <input
-                type="password"
-                value={password}
-                onChange={handlePasswordChange}
-                placeholder="비밀번호 입력"
-                maxLength={15}
-                className="Login_font"
-              />
-              <span className="char_count pw signup">{password.length}/15</span>
-
-              <div className="Login_Container">비밀번호 확인</div>
-              <input
-                type="password"
-                value={passwordConfirm}
-                onChange={handlePasswordConfirmChange}
-                placeholder="비밀번호 확인 입력"
-                maxLength={15}
-                className="Login_font"
-              />
-              <span className="char_count check signup">
-                {passwordConfirm.length}/15
-              </span>
-
-              <div className="Login_Container">닉네임 설정</div>
-              <input
-                type="text"
-                value={nickname}
-                onChange={handleNicknameChange}
-                placeholder="사용할 닉네임 설정"
-                maxLength={8}
-                className="Login_font"
-              />
-              <span className="char_count nick signup">
-                {nickname.length}/8
-              </span>
+              <div className="form-group">
+                <label htmlFor="passwordConfirm">비밀번호 확인:</label>
+                <input
+                  type="password"
+                  id="passwordConfirm"
+                  value={passwordConfirm}
+                  onChange={handlePasswordConfirmChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="nickname">닉네임:</label>
+                <input
+                  type="text"
+                  id="nickname"
+                  value={nickname}
+                  onChange={handleNicknameChange}
+                  required
+                />
+              </div>
             </>
           )}
-
-          {error && <p className="error-message">{error}</p>}
           <button
             type="submit"
-            className={`login_button ${type === "login" ? "L1" : "L3"}`}
+            className="submit-button"
             disabled={isSubmitting}
           >
-            {type === "login" ? "로그인하기" : "가입하기"}
+            {isSubmitting
+              ? "처리 중..."
+              : type === "login"
+              ? "로그인"
+              : "회원가입"}
           </button>
-          {type === "login" && (
-            <button
-              type="button"
-              className="login_button L2"
-              onClick={() => {
-                onClose();
-                openSignupModal();
-              }}
-            >
-              회원가입
-            </button>
-          )}
         </form>
+        {type === "login" && (
+          <p className="signup-prompt">
+            아직 회원이 아니신가요?{" "}
+            <span className="signup-link" onClick={openSignupModal}>
+              회원가입
+            </span>
+          </p>
+        )}
       </div>
     </div>
   );
@@ -227,7 +195,7 @@ const AuthModal = ({
 AuthModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(["login", "signup"]).isRequired,
   password: PropTypes.string.isRequired,
   passwordConfirm: PropTypes.string,
   email: PropTypes.string.isRequired,
@@ -239,6 +207,8 @@ AuthModal.propTypes = {
   handleNicknameChange: PropTypes.func,
   handleSubmit: PropTypes.func.isRequired,
   openSignupModal: PropTypes.func,
+  csrfToken: PropTypes.string,
+  setCsrfToken: PropTypes.func,
 };
 
 export default AuthModal;
