@@ -1,0 +1,399 @@
+/* @font-face 설정 */
+@font-face {
+  font-family: "nanum";
+  font-weight: 800;
+  src: url("../font/Nanum.ttf") format("truetype");
+  line-height: 32;
+}
+
+@font-face {
+  font-family: "nanum_bold";
+  font-weight: 800;
+  src: url("../font/Nanum_bold.ttf") format("truetype");
+  line-height: 32;
+}
+
+/* 기본 스타일 */
+.Monthly-back {
+  position: relative;
+  background-image: url("../image/background_Monthly.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
+.monthly-stat {
+  max-width: 1200px;
+  width: 60%;
+  margin: 0 auto;
+  padding: 30px;
+  font-family: "NanumL1", sans-serif;
+}
+
+.monthly-stat img {
+  position: absolute;
+  top: 8%;
+  left: 30%;
+  width: 15%;
+  height: auto;
+}
+
+.stat-header {
+  background-color: #f9f9f9;
+  border-radius: 40px;
+  padding: 10%;
+  height: 30%;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 40%;
+  margin-bottom: 1%;
+}
+
+.stat-header .title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+}
+
+.stat-header .title h1 {
+  font-family: "nanum_bold";
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 35.36px;
+  color: #1a1a1a;
+}
+
+.calendar-container {
+  margin: 20px 0;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.nav-button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.nav-button:hover {
+  background-color: #1565c0;
+}
+
+.nav-button:first-of-type {
+  margin-right: 20%;
+}
+
+.nav-button:last-of-type {
+  margin-left: 20%;
+}
+
+.calendar {
+  margin-top: 0px;
+}
+
+.calendar table {
+  width: 100%;
+  border-spacing: 35px;
+}
+
+.calendar th {
+  height: 60px;
+  width: 100px;
+  text-align: center;
+}
+
+.calendar td {
+  height: 60px;
+  width: 130px;
+  text-align: center;
+}
+
+.calendar th {
+  font-family: nanum;
+  font-size: 24px;
+  color: #1a1a1a;
+}
+
+.calendar td {
+  border: 4px solid;
+  font-size: 17px;
+  border-radius: 20px;
+}
+
+/* 상태별 스타일 */
+.calendar td.empty {
+  background-color: transparent;
+  color: transparent;
+  border: 5px solid transparent;
+}
+
+.calendar td.filled {
+  background-color: #fff;
+  color: transparent;
+  border: 5px solid #e9eaea;
+}
+
+.calendar td.today {
+  border: 2px solid #ff5c01; /* 오늘 날짜 강조 */
+}
+
+.calendar td.completed-100 {
+  background-color: #0090f4;
+  border: 5px solid transparent;
+  color: transparent;
+}
+
+.calendar td.completed-50 {
+  background-color: #00c2ff;
+  border: 5px solid transparent;
+  color: transparent;
+}
+
+.calendar td.completed-10 {
+  background-color: #b5e3f2;
+  border: 5px solid transparent;
+  color: transparent;
+}
+
+/* 상태별 우선순위 적용 */
+.calendar td.completed-100.today {
+  border: 2px solid rgb(105, 105, 38); /* 오늘 날짜가 100% 완료일 때 강조 */
+}
+
+.small-calendar-container {
+  background-color: #ffffff;
+  position: relative;
+  top: -6%;
+  max-width: 400px; /* 작은 캘린더의 최대 너비 설정 */
+  border-radius: 50px;
+  margin: 60px; /* 중앙 정렬 */
+  color: #0090f4;
+}
+
+.small-calendar-title {
+  text-align: center;
+  font-size: 16px; /* 제목 크기 조정 */
+  margin-bottom: 10px; /* 제목과 테이블 간 간격 조정 */
+}
+
+.small-calendar table {
+  margin-bottom: -50%;
+  margin-top: 20%;
+  height: 250px;
+  width: 350px; /* 테이블 너비를 100%로 설정 */
+  border-collapse: separate; /* 셀 간격을 분리 */
+  border-spacing: 13px; /* 셀 간격 추가 */
+}
+
+.small-calendar th,
+.small-calendar td {
+  padding: 3px; /* 셀 패딩 조정 */
+  text-align: center; /* 셀 텍스트 중앙 정렬 */
+  font-size: 14px; /* 폰트 크기 조정 */
+}
+
+.small-calendar td {
+  border-radius: 13px;
+}
+
+.small-calendar td.filled {
+  background-color: #6a737d; /* 채워진 날짜 배경색 */
+  color: transparent; /* 글자 색상 조정 */
+}
+
+.small-calendar td.empty {
+  background-color: #ffffff; /* 비어있는 날짜 배경색 */
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+.legend-item {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #bbbbbb;
+  border-radius: 30%;
+  margin: 0 10px;
+}
+
+.legend-item.completed {
+  background-color: #0090f4;
+}
+
+.legend-item.partial {
+  background-color: #00c2ff;
+}
+
+.legend-item.little {
+  background-color: #b5e3f2;
+}
+
+.legend-item.ongoing {
+  background-color: #ff5c01;
+}
+
+.legend-item.none {
+  background-color: #ffffff;
+}
+
+.legend-activity {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 30px;
+}
+
+.legend-activity-card {
+  background-color: #faf8f4;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  color: #1a1a1a;
+  text-align: center;
+  flex: 1;
+  margin: 0 10px;
+}
+
+.legend-activity-card p {
+  font-family: "nanum";
+  font-size: 1.2em;
+  line-height: 17.68px;
+  margin-top: 2%;
+  margin-bottom: 3%;
+}
+
+.legend-activity-card p2 {
+  font-family: "nanum";
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 13.26px;
+}
+
+.legend-activity-card span {
+  font-family: "nanum_bold";
+  display: block;
+  color: #0090f4;
+  margin-top: 20px;
+  font-size: 24px;
+  line-height: 26.52px;
+  font-weight: bold;
+}
+
+.activity-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.activity-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin-top: 10%;
+  gap: 100px;
+}
+
+.activity-header img {
+  position: absolute;
+  top: 38%;
+  left: -16%;
+  width: 5%;
+  height: auto;
+}
+
+.activity-header h3 {
+  font-size: 32px;
+  font-family: "nanum_bold";
+  display: flex;
+  margin-left: -9%;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.activity-header span {
+  margin-left: -6%;
+  margin-right: 50%;
+  flex-shrink: 0;
+  color: #6a737d;
+}
+
+.activity-card h3,
+.top-activities h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.activity-detail p,
+.top-activity-card p {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #180606;
+}
+
+.activity-detail-card {
+  background-color: #faf8f4;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  width: 30%;
+  color: #d1d1d1;
+  text-align: center;
+  flex: 1%;
+  margin: 0 10px;
+}
+
+.activity-steps {
+  overflow-x: auto;
+}
+.activity-step {
+  display: flex;
+  justify-content: space-around; /* 요소 간격 조정 */
+  gap: 5%; /* 요소 간격 조정 */
+  height: 5%;
+  padding: 30px;
+  width: 1300px;
+}
+
+.calendar-small {
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2%;
+  border-radius: 10%;
+  height: 400px;
+  width: 100%;
+}
+
+.calendar-small span {
+  font-family: "nanumL1";
+  font-weight: 700;
+  line-height: 26.52px;
+
+  position: relative;
+  top: -5%;
+  left: 34%;
+  font-size: 32px;
+}
+
+.calendar-small img {
+  position: relative;
+  width: 20%;
+  top: 8%;
+  left: -33%;
+}

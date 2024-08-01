@@ -1,0 +1,174 @@
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Logo from './image/logo.png';
+import Logo_2 from './image/logo_footer.png';
+import kakao from './image/kakao.png';
+import instagram from './image/instagram.png';
+import 느림메인 from './image/느림이_테마.png';
+import Vector from './image/vector_1.png';
+import Vector2 from './image/vector_2.png';
+import 느림1 from './image/느림이2.png';
+import 느림2 from './image/느림이1.png';
+import './App.css';
+
+const Modal = ({ isOpen, onClose, children }) => {
+  if (!isOpen) return null;
+  return (
+    <div className="modal-overlay">
+      <div className="modal">
+        <button className="close-button" onClick={onClose}><log_close>x</log_close></button>
+        {children}
+      </div>
+    </div>
+  );
+};
+
+const App = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 30);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const openLoginModal = () => setIsLoginModalOpen(true);
+  const closeLoginModal = () => setIsLoginModalOpen(false);
+  const openSignupModal = () => setIsSignupModalOpen(true);
+  const closeSignupModal = () => setIsSignupModalOpen(false);
+
+  return (
+    <div className='app'>
+      <header className={`nav_bar ${isScrolled ? 'scrolled' : ''}`}>
+        <div className='nav_logo'>
+          <Link to="/"><img src={Logo} alt="BigCo Inc. logo" /></Link>
+        </div>
+        <ul className='nav_main'>
+          <li><Link to="/steps">저속노화 발걸음</Link></li>
+          <li><Link to="/monthly-stats">월간 통계</Link></li>
+        </ul>
+        <div className='nav_login'>
+          <div className='login' onClick={openLoginModal}>로그인</div>
+          <div className='signup' onClick={openSignupModal}> 회원가입</div>
+        </div>
+      </header>
+
+      <div className='slowness_Theme'>
+        <img src={느림메인} alt='slowness main Logo' />
+      </div>
+
+      <div className='content'>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/steps" element={<Steps />} />
+          <Route path="/monthly-stats" element={<MonthlyStats />} />
+        </Routes>
+      </div>
+
+      <footer className='footer'>
+        <div className='footer-content'>
+          <div className='footer-icon'>
+            <img src={Logo_2} alt="Footer Icon" />
+          </div>
+          <div className='footer-links'>
+            <Link to="/terms">이용약관</Link>
+            <Link to="/privacy">개인정보처리방침</Link>
+            <Link to="/guide">이용가이드</Link>
+            <Link to="/about">ABOUT US</Link>
+          </div>
+          <div className='social-icons'>
+            <a href="https://instagram.com"><img src={instagram} alt="Instagram" /></a>
+            <a href="https://kakaotalk.com"><img src={kakao} alt="KakaoTalk" /></a>
+          </div>
+        </div>
+        <p className='address'>찾아오시는 길 : 대전광역시 유성구 동서대로 125 한밭대학교</p>
+        <p className='copyright'>Copyright © 느림의 미학. All rights reserved.</p>
+      </footer>
+
+      <Modal isOpen={isLoginModalOpen} onClose={closeLoginModal}>
+        <h2>로그인</h2>
+        <input type="text" placeholder="아이디" />
+        <input type="password" placeholder="비밀번호" />
+        <button><login>로그인</login></button>
+      </Modal>
+
+      <Modal isOpen={isSignupModalOpen} onClose={closeSignupModal}>
+        <h2>회원가입</h2>
+        <input type="text" placeholder="아이디" />
+        <input type="email" placeholder="이메일" />
+        <input type="password" placeholder="비밀번호" />
+        <input type="password" placeholder="비밀번호 확인" />
+        <button>회원가입</button>
+      </Modal>
+    </div>
+  );
+};
+
+const Home = () => (
+  <>
+    <section className='login_section'>
+      <p className='login_message'>
+        저속노화<span className='font_light1'>로 건강한 삶을 오래 유지하고 싶으신가요?</span>
+      </p>
+      <p className='login_message2'>
+        <span>느림의 미학</span>과 함께라면 어렵지 않아요!
+      </p>
+      <button className='login_button login'>로그인</button>
+      <button className='login_button signup'>회원가입</button>
+    </section>
+
+    <section className='description_section'>
+      <h2>저속노화가 무엇인가요?</h2>
+      <p>노화 과정을 천천히 진행시키고, 가능한 한 건강하게 나이를 먹도록<br />도와주는 생활습관과 방법들을 실천하는 것입니다</p>
+    </section>
+
+    <section className='features_section'>
+      <h2>느림의 미학에서 함께할 수 있어요</h2>
+      <div className='features'>
+        <div className='feature'>
+          <div className='feature_header'>
+            <p>1</p>
+          </div>
+          <p><span className='font_light1'>저속노화를 위한 첫번째 걸음</span></p>
+          <p2>저속노화 발걸음</p2>
+        </div>
+        <div className="wrapper">
+          <p><img src={Vector} alt="BigCo Inc. logo" className="vector" /></p>
+          <img src={느림1} alt="BigCo Inc. logo" className="absolute-img1" />
+        </div>
+        <div className="wrapper">
+          <p2><img src={Vector2} alt="BigCo Inc. logo" className="vector2" /></p2>
+          <img src={느림2} alt="BigCo Inc. logo" className="absolute-img2" />
+        </div>
+        <div className='feature'>
+          <div className='feature_header'>
+            <p>2</p>
+          </div>
+          <p><span className='font_light1'>한 달의 통계를 통해 건강 지키기</span></p>
+          <p2>월간 통계</p2>
+        </div>
+      </div>
+    </section>
+  </>
+);
+
+const Steps = () => (
+  <div>
+    <h2>저속노화 발걸음</h2>
+    <p>저속노화를 위한 여러 단계와 방법들을 안내합니다.</p>
+  </div>
+);
+
+const MonthlyStats = () => (
+  <div>
+    <h2>월간 통계</h2>
+    <p>한 달 동안의 건강 데이터를 분석하여 통계로 보여드립니다.</p>
+  </div>
+);
+
+export default App;

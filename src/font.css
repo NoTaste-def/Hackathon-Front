@@ -1,0 +1,34 @@
+/* @font-face 설정 */
+@font-face {
+  font-family: "nanum";
+  font-weight: 100;
+  src: url("./font/Nanum.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "NanumL1";
+  font-style: normal;
+  font-weight: 100;
+  src: url("./font/NanumL1.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "NanumL2";
+  font-style: normal;
+  font-weight: bold;
+  src: url("./font/NanumL2.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Rix";
+  font-style: normal;
+  font-weight: normal;
+  src: url("./font/Rix.ttf") format("truetype");
+}
+
+.font_light1 {
+  font-family: "NanumL1";
+}
+.font_light2 {
+  font-family: "NanumL2";
+}

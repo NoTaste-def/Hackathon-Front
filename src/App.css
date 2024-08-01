@@ -1,38 +1,419 @@
-.App {
+/* 전체 배경색 설정 */
+
+body {
+  background-color: #faf8f4;
+  margin: 0;
+  font-family: "nanum", Arial, sans-serif; /* 폰트 적용 */
+}
+
+.app {
+  position: relative;
+}
+
+.home {
+  position: relative;
+  background-image: url("./image/background.png");
+  padding-bottom: 3%;
+  background-size: cover; /* 배경 이미지를 화면에 꽉 채우도록 설정 */
+  background-repeat: no-repeat; /* 배경 이미지 반복 없이 한 번만 표시 */
+  background-position: center 350px; /* 배경 이미지를 가운데 정렬 */
+  width: 100%;
+  height: 300%;
+}
+
+.slowness_Theme {
+  position: absolute; /* 이미지를 absolute로 설정하여 위치를 고정 */
+  bottom: 72%; /* 원하는 위치로 설정 */
+  left: 17%; /* 원하는 위치로 설정 */
+  width: 18%;
+  height: auto;
+}
+
+.absolute-img1 {
+  position: absolute; /* 이미지를 absolute로 설정하여 위치를 고정 */
+  top: 75%; /* 원하는 위치로 설정 */
+  left: 21%; /* 원하는 위치로 설정 */
+  width: 13%;
+  height: auto;
+}
+.absolute-img2 {
+  position: absolute; /* 이미지를 absolute로 설정하여 위치를 고정 */
+  top: 72%; /* 원하는 위치로 설정 */
+  left: 63%; /* 원하는 위치로 설정 */
+  width: 21%;
+  height: auto;
+}
+
+.vector {
+  position: absolute;
+  top: 62%;
+  left: 24%;
+}
+
+.vector2 {
+  position: absolute;
+  top: 62%;
+  right: 24%;
+}
+
+@media (max-width: 768px) {
+  .home {
+    background-attachment: fixed;
+    background-image: url("./image/background_media.png");
+    margin-bottom: -9.3%;
+  }
+
+  .slowness_Theme {
+    display: none;
+  }
+  .app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .content {
+    flex: 1;
+  }
+
+  .absolute-img1 {
+    position: absolute; /* 이미지를 absolute로 설정하여 위치를 고정 */
+    top: 52%; /* 원하는 위치로 설정 */
+    left: 24%; /* 원하는 위치로 설정 */
+    width: 39%;
+    height: auto;
+  }
+
+  .absolute-img2 {
+    position: absolute; /* 이미지를 absolute로 설정하여 위치를 고정 */
+    top: 79%; /* 원하는 위치로 설정 */
+    left: 19%; /* 원하는 위치로 설정 */
+    width: 70%;
+    height: auto;
+  }
+
+  .vector {
+    position: absolute;
+    top: 42.2%;
+    left: 32%;
+  }
+
+  .vector2 {
+    position: absolute;
+    top: 69.8%;
+    left: 32%;
+  }
+}
+
+/* 프로필 섹션 스타일 */
+
+.profile_section {
+  padding: 100px;
+  border-radius: 10px;
+  margin: auto;
+  margin-right: 200px;
+  margin-top: 8%;
+  width: 500px;
+  height: 50%;
+  font-size: 40px;
+}
+
+.profile_section span {
+  color: #0090f4;
+}
+
+.profile_card {
+  background-color: #fff; /* 카드 배경색 */
+  margin-top: 8%;
+  margin-bottom: -30%;
+  margin-left: -0%;
+  border-radius: 75px; /* 둥근 모서리 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 */
+  padding: 50px; /* 카드 내부 여백 */
+  width: 100%; /* 카드 너비를 100%로 설정 */
+  max-width: 100%; /* 카드 너비 최대값 */
+  text-align: center; /* 카드 내부 텍스트 중앙 정렬 */
+  display: flex; /* Flexbox 사용 */
+  justify-content: space-around; /* 아이템들을 공간에 고르게 배치 */
+  align-items: center; /* 아이템들을 세로축 중앙 정렬 */
+}
+
+.profile_card h3 {
+  border-radius: 15px;
+  width: auto; /* 제목 너비 조정 */
+  margin: 0 auto 10%; /* 제목 가운데 정렬과 여백 설정 */
+  font-size: 20px; /* 제목 글자 크기 */
+  color: #000; /* 제목 글자 색상 */
+  padding: 10px; /* 제목 내부 여백 추가 */
+  font-weight: bold;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.profile_value {
+  display: inline-block;
+  margin: 2% 0;
+  width: 100%; /* 항목 간 여백 */
+  font-size: 32px; /* 항목 글자 크기 */
+  font-family: "Rix";
+  color: #000000; /* 항목 글자 색상 */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.profile_value span {
+  background: linear-gradient(
+    45deg,
+    #00bd56,
+    #88e342,
+    #c3f439
+  ); /* 색1에서 색3까지의 45도 그라데이션 */
+  -webkit-background-clip: text; /* 텍스트만 그라데이션 효과가 적용되도록 지정 */
+  color: transparent; /* 텍스트를 투명하게 함 */
+}
+@media (max-width: 768px) {
+  .profile_section {
+    padding: 100px;
+    text-align: left;
+    border-radius: 10px;
+    margin: auto;
+    margin-right: 200px;
+    margin-top: 30%;
+    width: 500px;
+    height: 50%;
+  }
+
+  .profile_card {
+    background-color: #fff; /* 카드 배경색 */
+    border-radius: 15px; /* 둥근 모서리 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 */
+    padding: 30px; /* 카드 내부 여백 */
+    width: 50%; /* 카드 너비를 100%로 설정 */
+    max-width: 100%; /* 카드 너비 최대값 */
+    text-align: center; /* 카드 내부 텍스트 중앙 정렬 */
+  }
+
+  .profile_card h3 {
+    background-color: #1e88e5;
+    border-radius: 15px;
+    width: 40%; /* 제목 너비 조정 */
+    margin: 0 auto 10%; /* 제목 가운데 정렬과 여백 설정 */
+    font-size: 20px; /* 제목 글자 크기 */
+    color: #fff; /* 제목 글자 색상 */
+    padding: 10px; /* 제목 내부 여백 추가 */
+  }
+
+  .profile_card p {
+    margin: 2% 0; /* 항목 간 여백 */
+    font-size: 16px; /* 항목 글자 크기 */
+    font-family: "NanumL1";
+    color: #666; /* 항목 글자 색상 */
+  }
+
+  .profile_card p:first-of-type {
+    margin-top: 0; /* 첫 번째 항목 상단 여백 제거 */
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* 설명 섹션 스타일 */
+.description_section {
+  text-align: center;
+  padding: 50px;
+}
+
+.description_section h2 {
+  margin-top: 310px;
+  margin-bottom: -160px;
+  font-size: 30px;
+}
+
+.description_section p {
+  background-color: rgb(255, 255, 255);
+  padding: 70px;
+  border-radius: 30px;
+  margin: auto;
+  margin-top: 200px;
+  margin-bottom: 50px;
+  width: 75%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-size: 21px;
+  line-height: 2;
+}
+
+/* 특징 섹션 스타일 */
+.features_section {
+  text-align: center;
+  margin: 50px auto;
+  width: 80%;
+}
+
+.features_section h2 {
+  margin-bottom: 50px;
+  font-size: 30px;
+}
+
+.features {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-around;
+  margin-top: 60px;
 }
 
-.App-link {
-  color: #61dafb;
+.feature {
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 20px;
+  width: 45%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 700px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.feature_header {
+  font-size: 32px;
+  font-weight: bold;
+  color: #1e88e5;
+  margin-bottom: 80px;
+}
+
+.feature p2 {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.login_section {
+  padding: 100px;
+  text-align: left;
+  border-radius: 10px;
+  margin: auto;
+  margin-right: 200px;
+  margin-top: 150px;
+  width: 500px;
+  flex-direction: column; /* 버튼들을 세로로 배치합니다 */
+  align-items: center; /* 가운데 정렬합니다 */
+}
+
+.login_message {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.login_message2 {
+  font-size: 30px;
+  margin-bottom: 60px;
+}
+
+.login_message2 span {
+  color: #1e88e5; /* 느림의 미학 강조 색상 */
+  font-weight: bold;
+}
+
+.login_button {
+  display: block;
+  width: 100%;
+  height: 70px;
+  padding: 12px;
+  margin-top: 10px; /* 각 버튼들을 아래로 내립니다 */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login_button.login {
+  background-color: #0090f4;
+  color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-family: "NanumL2";
+  font-size: 20px;
+}
+
+.Login_Container {
+  margin-bottom: 13px;
+  margin-top: 20px;
+}
+
+.Login_font {
+  font-family: "Nanum";
+}
+
+.login_button.L1 {
+  background-color: #0090f4;
+  color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-family: "NanumL2";
+  margin-top: 15%;
+  font-size: 15x;
+  width: 100%;
+  height: 10%;
+}
+
+.login_button.L2 {
+  color: #0090f4;
+  background: none;
+  outline: none;
+  font-family: "nanum";
+  margin-top: 0%;
+  font-size: 15x;
+  width: 100%;
+}
+
+.login_button.L3 {
+  background-color: #0090f4;
+  color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-family: "NanumL2";
+  margin-top: 8%;
+  font-size: 15x;
+  width: 100%;
+  height: 6%;
+}
+
+/* 반응형 디자인 추가 */
+@media (max-width: 768px) {
+  .login_section {
+    margin-top: 40%;
+    width: 90%;
+    padding: 20px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .description_section {
+    width: 90%;
+    padding: 1.5%;
+  }
+
+  .features_section {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .login_message {
+    font-size: 16px; /* 폰트 크기 조정 */
+  }
+
+  .login_message2 {
+    font-size: 24px; /* 폰트 크기 조정 */
+  }
+
+  .login_button {
+    font-size: 14px; /* 폰트 크기 조정 */
+  }
+
+  .description_section p {
+    font-size: 16px; /* 폰트 크기 조정 */
+  }
+
+  .features {
+    flex-direction: column;
+  }
+
+  .feature {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+
+  .feature_header {
+    font-size: 20px; /* 폰트 크기 조정 */
+  }
+
+  .feature p2 {
+    font-size: 18px; /* 폰트 크기 조정 */
   }
 }

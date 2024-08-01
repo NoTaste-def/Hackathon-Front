@@ -1,0 +1,565 @@
+/* CSS 코드 시작 */
+/* @font-face 설정 */
+@font-face {
+  font-family: "nanum";
+  font-weight: 100;
+  src: url("./font/Nanum.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "nanum light 1";
+  font-style: normal;
+  font-weight: 100;
+  src: url("./font/NanumL1.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "nanum light 2";
+  font-style: normal;
+  font-weight: bold;
+  src: url("./font/NanumL2.ttf") format("truetype");
+}
+
+.font_light1 {
+  font-family: 'nanum light 1';
+}
+
+.font_light2 {
+  font-family: 'nanum light 2';
+}
+
+/* 전체 배경색 설정 */
+body {
+  background-color: #FAF8F4;
+  margin: 0;
+  font-family: "nanum", Arial, sans-serif; /* 폰트 적용 */
+  background-image: url('./image/background.png');
+  background-size: 100% auto;; /* 배경 이미지를 화면에 꽉 채우도록 설정 */
+  background-repeat: no-repeat; /* 배경 이미지 반복 없이 한 번만 표시 */
+  background-position: center top 500px; /* 배경 이미지를 가운데 정렬 */
+  height: auto;
+  background-attachment: local;
+} 
+
+.app { 
+  position: relative
+}
+
+.slowness_Theme {
+  position: absolute; /* 이미지를 absolute로 설정하여 위치를 고정 */
+  top: 1%; /* 원하는 위치로 설정 */
+  left: 19%; /* 원하는 위치로 설정 */
+  width: 16%;
+  height: auto;
+}
+
+.absolute-img1 {
+  position: absolute; /* 이미지를 absolute로 설정하여 위치를 고정 */
+  top: 69%; /* 원하는 위치로 설정 */
+  left: 19%; /* 원하는 위치로 설정 */
+  width: 16%;
+  height: auto;
+
+}
+.absolute-img2 {
+  position: absolute; /* 이미지를 absolute로 설정하여 위치를 고정 */
+  top: 69%; /* 원하는 위치로 설정 */
+  left: 60%; /* 원하는 위치로 설정 */
+  width: 21%;
+  height: auto;    
+}
+
+@media (max-width: 768px) {
+  body {
+    background-attachment: fixed;
+  }
+
+
+  .app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .content {
+    flex: 1;
+  }
+
+  .absolute-img1 {
+    position: absolute; /* 이미지를 absolute로 설정하여 위치를 고정 */
+    top: 52%; /* 원하는 위치로 설정 */
+    left: 24%; /* 원하는 위치로 설정 */
+    width: 39%;
+    height: auto;
+    
+  }
+
+  .absolute-img2 {
+    position: absolute; /* 이미지를 absolute로 설정하여 위치를 고정 */
+    top: 73%; /* 원하는 위치로 설정 */
+    left: 19%; /* 원하는 위치로 설정 */
+    width: 70%;
+    height: auto;
+    
+  }
+
+}
+
+/* 헤더 스타일 */
+
+.nav_logo {
+  margin-left: 100px; /* 로고를 오른쪽으로 옮김 */
+}
+
+.nav_logo img {
+  height: 80px; /* 로고 이미지 높이 조정 */
+}
+
+.nav_main {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-left: 20px;
+}
+
+.nav_main li {
+  margin: 0 5px;
+  margin-left: 100px;
+  margin-right: 100px;
+  
+}
+
+.nav_main a {
+  color: #000;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.nav_main a:hover {
+  text-decoration: underline;
+}
+
+.nav_login {
+  display: flex;
+  align-items: center;
+  background-color: #000000; /* 유저 박스 배경색 */
+  border-radius: 13px;
+  padding: 8px 12px;
+  margin-right: 100px;
+}
+
+.nav_login .login,
+.nav_login .signup {
+  color: #fff; /* 유저 박스 텍스트 색 */
+  font-size: 14px;
+  margin-left: 10px; /* 아이템 간의 간격 */
+  padding: 0 10px;
+}
+
+.nav_login .signup {
+  border-left: 1px solid #fff; /* 구분선 추가 */
+  padding-left: 10px;
+}
+
+.nav_bar {
+  background-color: transparent;
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease, padding 0.3s ease;
+}
+
+.nav_bar.scrolled {
+  background-color: #fff;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav_bar.scrolled .nav_logo img {
+  height: 50px; /* 스크롤될 때 작아지도록 로고 크기 조정 */
+}
+
+@media (max-width: 768px) {
+  .nav_bar.scrolled {
+    background-color: #fff;
+    padding: 1%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav_main {
+    margin-left: 10%; /* Adjusted margin for smaller screens */
+    margin-bottom: -5%; /* Adjusted margin for smaller screens */
+    justify-content: center;
+    flex-direction: row;
+  }
+
+  .nav_main li {
+    margin: 5px 0; /* Adjusted margin for smaller screens */
+  }
+
+  .nav_main a {
+    font-size: 14px; /* Reduced font size for smaller screens */
+  }
+
+  .nav_login {
+    margin-right: 20px; /* Adjusted margin for smaller screens */
+    margin-top: 30px; /* Adjusted margin for smaller screens */
+  }
+
+  .nav_login .login,
+  .nav_login .signup {
+    font-size: 12px; /* Reduced font size for smaller screens */
+  }
+}
+
+/* 로그인 섹션 스타일 */
+.login_section {
+  padding: 100px;
+  text-align: left;
+  border-radius: 10px;
+  margin: auto;
+  margin-right: 200px;
+  margin-top: 150px;
+  width: 500px;
+  flex-direction: column; /* 버튼들을 세로로 배치합니다 */
+  align-items: center; /* 가운데 정렬합니다 */
+}
+
+.login_message {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.login_message2 {
+  font-size: 30px;
+  margin-bottom: 60px;
+}
+
+.login_message2 span {
+  color: #1E88E5; /* 느림의 미학 강조 색상 */
+  font-weight: bold;
+}
+
+.login_button {
+  display: block;
+  width: 90%;
+  height: 70px;
+  padding: 15px;
+  margin-top: 30px; /* 각 버튼들을 아래로 내립니다 */
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login_button.google {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ccc;
+}
+
+.login_button.kakao {
+  background-color: #ffeb00;
+  color: #000;
+  border: 1px solid #ffeb00;
+}
+
+/* 설명 섹션 스타일 */
+.description_section {
+  text-align: center;
+  padding: 50px;
+}
+
+.description_section h2 {
+  margin-top: 270px;
+  margin-bottom: -160px;
+}
+
+.description_section p {
+  background-color: rgb(255, 255, 255);
+  padding: 70px;
+  border-radius: 18px;
+  margin: auto;
+  margin-top: 200px;
+  margin-bottom: 50px;
+  width: 75%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  font-size: 21px;
+  line-height: 2;
+}
+
+/* Modal 스타일 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 30px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 4%;
+  right: 90%;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.modal h2 {
+  margin-top: 0;
+  text-align: center;
+}
+
+.modal input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.modal log_close {
+  width: 100%;
+  padding: 3px;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+
+
+
+/* 특징 섹션 스타일 */
+.features_section {
+  text-align: center;
+  margin: 50px auto;
+  width: 80%;
+}
+
+.features_section h2 {
+  margin-bottom: 50px;
+}
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 60px;
+}
+
+.feature {
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 20px;
+  width: 45%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  height: 700px;
+}
+
+.feature_header {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1E88E5;
+  margin-bottom: 70px;
+}
+
+.feature p2 {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+/* 반응형 디자인 추가 */
+@media (max-width: 768px) {
+  .login_section {
+    margin-top: 40%;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .description_section {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .features_section {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .login_message {
+    font-size: 16px; /* 폰트 크기 조정 */
+  }
+
+  .login_message2 {
+    font-size: 24px; /* 폰트 크기 조정 */
+  }
+
+  .login_button {
+    font-size: 14px; /* 폰트 크기 조정 */
+  }
+
+  .description_section p {
+    font-size: 16px; /* 폰트 크기 조정 */
+  }
+
+  .features {
+    flex-direction: column;
+  }
+
+  .feature {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+
+  .feature_header {
+    font-size: 20px; /* 폰트 크기 조정 */
+  }
+
+  .feature p2 {
+    font-size: 18px; /* 폰트 크기 조정 */
+  }
+}
+
+@media (max-width: 768px) {
+  .nav_bar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+  }
+
+  .nav_logo {
+    margin-right: auto;
+    margin-left: 20px;
+  }
+  .nav_logo img{
+    
+    width: 50%;
+    height: 50%;
+  }
+  .nav_main {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 20px;
+  }
+
+  .nav_main li {
+    margin: 0 10px;
+  }
+
+  .nav_login {
+    margin-right: 20px;
+  }
+
+  .nav_login div {
+    font-size: 12px; /* Maintain font size */
+  }
+}
+
+/* 푸터 스타일 */
+
+.footer {
+  background-color: #1A1A1A;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column; /* Changed to column layout for responsiveness */
+  align-items: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px; /* Added margin bottom for spacing */
+}
+
+.footer-links a {
+  color: inherit;
+  text-decoration: none;
+  margin: 0 15px; /* Adjusted margin for spacing */
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px; /* Added margin bottom for spacing */
+}
+
+.social-icons a {
+  margin: 0 10px; /* Adjusted margin for spacing */
+}
+
+.social-icons img {
+  width: 30px; /* Reduced image size for better fit */
+}
+
+.footer-icon {
+  margin-left: 10px; /* Adjust margin-left to move the logo/icon slightly to the right */
+  margin-bottom: 20px; /* Maintain bottom margin for spacing */
+}
+
+.address {
+  margin-bottom: 10px; /* Added margin bottom for spacing */
+}
+
+/* 반응형 디자인 추가 */
+@media (min-width: 769px) {
+  .footer-content {
+    flex-direction: row; /* Revert to row layout for larger screens */
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-links {
+    margin-bottom: 0; /* Remove margin bottom for larger screens */
+  }
+
+  .social-icons {
+    margin-bottom: 0; /* Remove margin bottom for larger screens */
+  }
+
+  .social-icons a {
+    margin: 0 20px; /* Adjusted margin for spacing */
+  }
+
+  .footer-icon {
+    margin-bottom: 0; /* Remove margin bottom for larger screens */
+  }
+
+  .address {
+    margin-bottom: 0; /* Remove margin bottom for larger screens */
+  }
+}

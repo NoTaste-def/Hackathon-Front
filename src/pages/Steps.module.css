@@ -1,0 +1,65 @@
+.flex_wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  background-image: url("../image/background_Monthly.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
+.steps_wrapper {
+  display: grid;
+  height: auto;
+  grid-template-areas:
+    "mission mission mission"
+    "step step step"
+    "step step step"
+    "step step step"
+    "step step step";
+}
+.completion_state {
+  grid-area: mission;
+  margin-top: 80px;
+}
+.steps_wrapper {
+  grid-area: step;
+  margin: 100px;
+}
+
+.steps_control {
+  display: grid;
+  height: auto;
+  gap: 30px;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+@media (max-width: 1080px) {
+  .steps_control {
+    display: grid;
+    height: auto;
+    gap: 30px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 660px) {
+  .steps_control {
+    display: grid;
+    height: auto;
+    gap: 30px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 450px) {
+  .steps_control {
+    display: grid;
+    height: auto;
+    gap: 30px;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

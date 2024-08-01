@@ -1,0 +1,52 @@
+.bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.confirmModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  border-radius: 30px;
+  height: 350px;
+  width: 300px;
+  padding: 30px;
+}
+
+.confirmModal > button {
+  background-color: #1e88e5;
+  color: white;
+  border: none;
+  width: 80%;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.confirmModal > button:hover {
+  filter: drop-shadow(0 0 5px rgb(154, 154, 154));
+}
+.confirmModal > button:active {
+  background-color: rgb(26, 110, 183);
+  color: rgb(219, 219, 219);
+}
+
+.btnNav {
+  width: inherit;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.closeBtn:hover {
+  filter: drop-shadow(0px 0px 5px gray);
+}

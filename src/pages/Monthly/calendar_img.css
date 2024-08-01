@@ -1,0 +1,122 @@
+.calendar-small.sleep img {
+  position: relative;
+  width: 20%;
+  top: 8%;
+  left: -50%;
+}
+
+.calendar-small.sleep span {
+  top: -5%;
+  left: 29%;
+  font-size: 30px;
+}
+
+.calendar-small.noal img {
+  position: relative;
+  width: 20%;
+  top: 8%;
+  left: -13%;
+}
+
+.calendar-small.noal span {
+  top: -5%;
+  left: 40%;
+}
+
+.calendar-small.salad img {
+  position: relative;
+  width: 20%;
+  top: 8%;
+  left: -40%;
+}
+
+.calendar-small.water span {
+  top: -5%;
+  left: 37%;
+}
+
+.calendar-small.water img {
+  position: relative;
+  width: 20%;
+  top: 8%;
+  left: -25%;
+}
+
+.calendar-small.meditation img {
+  position: relative;
+  width: 20%;
+  top: 8%;
+  left: -42%;
+}
+
+.calendar-small.meditation span {
+  top: -5%;
+  left: 30%;
+  font-size: 30px;
+}
+
+.calendar-small.massage img {
+  position: relative;
+  width: 20%;
+  top: 8%;
+  left: -51%;
+}
+
+.calendar-small.massage span {
+  top: -5%;
+  left: 27%;
+  font-size: 30px;
+}
+
+.calendar-small.fastfood img {
+  position: relative;
+  width: 20%;
+  top: 8%;
+  left: -43%;
+}
+
+.calendar-small.fastfood span {
+  top: -5%;
+  left: 31%;
+  font-size: 30px;
+}
+
+.calendar-small.stretching img {
+  position: relative;
+  width: 20%;
+  top: 8%;
+  left: -29%;
+}
+
+.calendar-small.nuts img {
+  position: relative;
+  width: 20%;
+  top: 8%;
+  left: -35%;
+}
+
+.calendar-small.meal span {
+  top: -5%;
+  left: 29%;
+  font-size: 30px;
+}
+
+.calendar-small.meal img {
+  position: relative;
+  width: 20%;
+  top: 8%;
+  left: -45%;
+}
+
+.calendar-small.coffee span {
+  top: -5%;
+  left: 26%;
+  font-size: 30px;
+}
+
+.calendar-small.coffee img {
+  position: relative;
+  width: 20%;
+  top: 8%;
+  left: -52%;
+}

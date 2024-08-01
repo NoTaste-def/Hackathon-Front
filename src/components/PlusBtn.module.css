@@ -1,0 +1,42 @@
+.btnWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 180px;
+  height: 180px;
+  background-color: white;
+  box-shadow: 0px 0px 8px rgb(197, 197, 197);
+  border-radius: 40px;
+}
+
+.btnWrapper:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0px 0px 8px rgb(135, 135, 135);
+}
+.btnWrapper:active {
+  background-color: rgba(255, 255, 255);
+}
+
+.moreBtn {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  width: 25px;
+  height: 25px;
+  border: none;
+  background-color: transparent;
+  background: no-repeat;
+  background-image: url("../image/btn/more.png");
+}
+
+.plusBtn {
+  width: 60px;
+  height: 60px;
+  background-color: transparent;
+  border: none;
+  background: no-repeat;
+}
+
+.plusBtn {
+}

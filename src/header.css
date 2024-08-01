@@ -1,0 +1,169 @@
+/* 헤더 스타일 */
+
+.nav_logo {
+  margin-left: 100px; /* 로고를 오른쪽으로 옮김 */
+}
+
+.nav_logo img {
+  height: 80px; /* 로고 이미지 높이 조정 */
+}
+
+.nav_main {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-left: 10px;
+}
+
+.nav_main li {
+  margin: 0 5px;
+  margin-left: 75px;
+  margin-right: 75px;
+}
+
+.nav_main a {
+  color: #000;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.nav_main a:hover {
+  text-decoration: underline;
+}
+
+.nav_login {
+  display: flex;
+
+  align-items: center;
+  border-radius: 13px;
+  padding: 8px 12px;
+  margin-right: 100px;
+}
+
+.nav_logout {
+  display: flex;
+  align-items: center;
+  background-color: #000000; /* 유저 박스 배경색 */
+  border-radius: 13px;
+  padding: 8px 12px;
+  margin-right: 7%;
+  color: #fff; /* 유저 박스 텍스트 색 */
+  font-size: 1rem;
+}
+
+.nav_login .login,
+.nav_login .signup {
+  background-color: #1e88e5;
+  color: #ffffff; /* 유저 박스 텍스트 색 */
+  font-size: 13px;
+  border-radius: 13px;
+  margin-left: 10px; /* 아이템 간의 간격 */
+  padding: 10px 30px;
+}
+
+.nav_bar {
+  background-color: transparent;
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease, padding 0.3s ease;
+}
+
+.nav_bar.scrolled {
+  background-color: #fff;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav_bar.scrolled .nav_logo img {
+  width: 50%;
+  height: 50%;
+} /* 스크롤될 때 작아지도록 로고 크기 조정 */
+
+@media (max-width: 768px) {
+  .nav_bar.scrolled {
+    background-color: #fff;
+    padding: 1%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav_main {
+    margin-left: 1%; /* Adjusted margin for smaller screens */
+    justify-content: center;
+    flex-direction: row; /* Ensure the navigation items are in a row */
+    display: flex; /* Make sure the flexbox is applied */
+    align-items: center; /* Vertically align the items */
+  }
+
+  .nav_main li {
+    margin: 5px; /* Adjusted margin for smaller screens */
+  }
+
+  .nav_main a {
+    font-size: 12px; /* Reduced font size for smaller screens */
+  }
+
+  .nav_login {
+    margin-right: 5%; /* Adjusted margin for smaller screens */
+    margin-top: 1%; /* Adjusted margin for smaller screens */
+  }
+
+  .nav_login .login,
+  .nav_login .signup {
+    font-size: 0.4rem; /* Reduced font size for smaller screens */
+  }
+
+  .nav_logout {
+    display: flex;
+    align-items: center;
+    background-color: #000000; /* 유저 박스 배경색 */
+    border-radius: 13px;
+    padding: 5px 12px;
+    margin-right: 5%;
+    color: #fff; /* 유저 박스 텍스트 색 */
+    font-size: 0.5rem;
+  }
+
+  .nav_bar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+  }
+
+  .nav_logo {
+    margin-right: auto;
+    margin-left: 20px;
+  }
+  .nav_logo img {
+    width: 50%;
+    height: 50%;
+  }
+  .nav_main {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 20px;
+  }
+
+  .nav_main li {
+    margin: 0 10px;
+  }
+
+  .nav_login {
+    margin-right: 20px;
+  }
+
+  .nav_login div {
+    font-size: 12px; /* Maintain font size */
+  }
+}

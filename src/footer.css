@@ -1,0 +1,87 @@
+/* 푸터 스타일 */
+
+.footer {
+  background-color: #1a1a1a;
+  color: #fff;
+  text-align: center;
+  padding: 30px 0;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column; /* Changed to column layout for responsiveness */
+  align-items: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+}
+
+.footer-links a {
+  color: inherit;
+  text-decoration: none;
+  margin: 0 20px; /* Adjusted margin for spacing */
+  font-family: "NanumL2";
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  margin-right: 30%;
+}
+
+.social-icons a {
+  margin: 0 10px; /* Adjusted margin for spacing */
+}
+
+.social-icons img {
+  width: 30px; /* Reduced image size for better fit */
+}
+
+.footer-icon {
+  position: relative;
+  margin-left: 10%; /* Adjust margin-left to move the logo/icon slightly to the right */
+  margin-bottom: 50%; /* Maintain bottom margin for spacing */
+}
+
+.F_dump {
+  margin-right: 21%;
+}
+
+.address {
+  margin-bottom: 10px; /* Added margin bottom for spacing */
+}
+.copyright {
+  margin-right: 5.1%;
+  font-family: "NanumL2"; /* Added margin bottom for spacing */
+}
+
+/* 반응형 디자인 추가 */
+@media (min-width: 769px) {
+  .footer-content {
+    flex-direction: row; /* Revert to row layout for larger screens */
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-links {
+    margin-bottom: 0; /* Remove margin bottom for larger screens */
+  }
+
+  .social-icons {
+    margin-bottom: 0; /* Remove margin bottom for larger screens */
+  }
+
+  .social-icons a {
+    margin: 0 20px; /* Adjusted margin for spacing */
+  }
+
+  .footer-icon {
+    margin-bottom: 0; /* Remove margin bottom for larger screens */
+  }
+
+  .address {
+    margin-bottom: 0; /* Remove margin bottom for larger screens */
+  }
+}

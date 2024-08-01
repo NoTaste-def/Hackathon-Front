@@ -1,0 +1,54 @@
+.btnWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 180px;
+  height: 180px;
+  background-color: white;
+  box-shadow: 0px 0px 8px rgb(197, 197, 197);
+  border-radius: 40px;
+  border: 3px solid transparent;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.clicked {
+  background-color: #fff3ec;
+  border: 3px solid #ff5c01;
+}
+
+.btnWrapper:hover {
+  box-shadow: 0px 0px 8px rgb(133, 133, 133);
+}
+
+.moreBtn {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  width: 25px;
+  height: 25px;
+  border: none;
+  border-radius: 10px;
+  background-color: transparent;
+  background: no-repeat;
+  background-image: url("../image/btn/more.png");
+}
+
+.moreBtn:hover {
+  background-image: url("../image/btn/more.png");
+  background-color: rgba(154, 154, 154, 0.2);
+}
+
+.btnImg {
+  width: 60px;
+  height: 60px;
+  background-color: transparent;
+  border: none;
+  background: no-repeat;
+}
+
+.btnName {
+  margin-top: 20px;
+  font-size: 1.2rem;
+}
