@@ -113,15 +113,27 @@ const StepSelection = ({ selec, setSelec }) => {
     navigate(-1);
   };
 
-  const handleSubmit = () => {
-    axios
-      .post(`${URL}save-user-todo/`, { user_todo: selec })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+  const handleSubmit = async () => {
+    try {
+      // CSRF 토큰 가져오기
+      const csrfToken = document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content");
+
+      const response = await axios.post(
+        `${URL}save-user-todo/`,
+        { user_todo: selec },
+        {
+          headers: {
+            "X-CSRFToken": csrfToken,
+          },
+        }
+      );
+
+      console.log("Response:", response);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
