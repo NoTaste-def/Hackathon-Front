@@ -24,23 +24,22 @@ const AuthModal = ({
   csrfToken,
   setCsrfToken,
 }) => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); // 추가된 상태
 
   if (!isOpen) return null;
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
-    if (type === "login") {
-      setIsSubmitting(true);
+    try {
+      const token = await getCsrfToken();
+      setCsrfToken(token);
 
-      try {
+      if (type === "login") {
         const response = await axios.post(
           `${URL}/login/`,
-          {
-            user_email: email,
-            password: password,
-          },
+          { user_email: email, password: password },
           {
             withCredentials: true,
             headers: { "X-CSRFToken": csrfToken, Accept: "application/json" },
@@ -68,45 +67,29 @@ const AuthModal = ({
           title,
           user_email,
         });
-      } catch (error) {
-        alert("로그인 실패!");
-        if (error.response) {
-          console.error("서버 응답 오류:", error.response.data);
-        } else {
-          console.error("요청 오류:", error.message);
+      } else if (type === "signup") {
+        if (password !== passwordConfirm) {
+          alert("비밀번호가 일치하지 않습니다.");
+          return;
         }
-        if (error.response && error.response.status === 403) {
-          const newToken = await getCsrfToken();
-          setCsrfToken(newToken);
-        }
-      } finally {
-        setIsSubmitting(false);
-      }
-    } else if (type === "signup") {
-      if (password !== passwordConfirm) {
-        alert("비밀번호가 일치하지 않습니다.");
-        return;
-      }
-      setIsSubmitting(true);
 
-      try {
-        const response = await axios.post(`${URL}/register/`, {
-          user_email: email,
-          password: password,
-          nickname: nickname,
-        });
+        await axios.post(
+          `${URL}/register/`,
+          { user_email: email, password: password, nickname: nickname },
+          {
+            withCredentials: true,
+            headers: { "X-CSRFToken": csrfToken, Accept: "application/json" },
+          }
+        );
+
         alert("회원가입 성공!");
         handleSubmit();
-      } catch (error) {
-        alert("회원가입 실패!");
-        if (error.response) {
-          console.error("서버 응답 오류:", error.response.data);
-        } else {
-          console.error("요청 오류:", error.message);
-        }
-      } finally {
-        setIsSubmitting(false);
       }
+    } catch (error) {
+      alert(type === "login" ? "로그인 실패!" : "회원가입 실패!");
+      console.error("요청 오류:", error.message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -121,72 +104,102 @@ const AuthModal = ({
         >
           x
         </button>
-        <h2>{type === "login" ? "로그인" : "회원가입"}</h2>
-        <form onSubmit={handleFormSubmit}>
-          <div className="form-group">
-            <label htmlFor="email">이메일:</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={handleEmailChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">비밀번호:</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={handlePasswordChange}
-              required
-            />
-          </div>
-          {type === "signup" && (
+        <h2>{type === "login" ? "회원 로그인" : "회원가입"}</h2>
+        <form onSubmit={handleFormSubmit} className="form_container">
+          {type === "login" && (
             <>
-              <div className="form-group">
-                <label htmlFor="passwordConfirm">비밀번호 확인:</label>
-                <input
-                  type="password"
-                  id="passwordConfirm"
-                  value={passwordConfirm}
-                  onChange={handlePasswordConfirmChange}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="nickname">닉네임:</label>
-                <input
-                  type="text"
-                  id="nickname"
-                  value={nickname}
-                  onChange={handleNicknameChange}
-                  required
-                />
-              </div>
+              <div className="Login_Container">아이디</div>
+              <input
+                type="email"
+                value={email}
+                onChange={handleEmailChange}
+                placeholder="이메일 주소 입력"
+                className="Login_font"
+              />
+
+              <div className="Login_Container">비밀번호</div>
+              <input
+                type="password"
+                value={password}
+                onChange={handlePasswordChange}
+                placeholder="영문,숫자 조합 15자 이내 비밀번호"
+                maxLength={15}
+                className="Login_font"
+              />
+              <span className="char_count pw login">{password.length}/15</span>
             </>
           )}
+          {type === "signup" && (
+            <>
+              <div className="Login_Container">아이디</div>
+              <input
+                type="email"
+                value={email}
+                onChange={handleEmailChange}
+                placeholder="이메일 주소 입력"
+                className="Login_font"
+              />
+
+              <div className="Login_Container">비밀번호</div>
+              <input
+                type="password"
+                value={password}
+                onChange={handlePasswordChange}
+                placeholder="비밀번호 입력"
+                maxLength={15}
+                className="Login_font"
+              />
+              <span className="char_count pw signup">{password.length}/15</span>
+
+              <div className="Login_Container">비밀번호 확인</div>
+              <input
+                type="password"
+                value={passwordConfirm}
+                onChange={handlePasswordConfirmChange}
+                placeholder="비밀번호 확인 입력"
+                maxLength={15}
+                className="Login_font"
+              />
+              <span className="char_count check signup">
+                {passwordConfirm.length}/15
+              </span>
+
+              <div className="Login_Container">닉네임 설정</div>
+              <input
+                type="text"
+                value={nickname}
+                onChange={handleNicknameChange}
+                placeholder="사용할 닉네임 설정"
+                maxLength={8}
+                className="Login_font"
+              />
+              <span className="char_count nick signup">
+                {nickname.length}/8
+              </span>
+            </>
+          )}
+
+          {error && <p className="error-message">{error}</p>}
           <button
             type="submit"
-            className="submit-button"
+            className={`login_button ${type === "login" ? "L1" : "L3"}`}
             disabled={isSubmitting}
           >
-            {isSubmitting
-              ? "처리 중..."
-              : type === "login"
-              ? "로그인"
-              : "회원가입"}
+            {type === "login" ? "로그인하기" : "가입하기"}
           </button>
-        </form>
-        {type === "login" && (
-          <p className="signup-prompt">
-            아직 회원이 아니신가요?{" "}
-            <span className="signup-link" onClick={openSignupModal}>
+          {type === "login" && (
+            <button
+              type="button"
+              className="login_button L2"
+              onClick={() => {
+                onClose();
+                openSignupModal();
+              }}
+            >
               회원가입
-            </span>
-          </p>
-        )}
+            </button>
+          )}
+        </form>
       </div>
     </div>
   );
@@ -195,7 +208,7 @@ const AuthModal = ({
 AuthModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  type: PropTypes.oneOf(["login", "signup"]).isRequired,
+  type: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
   passwordConfirm: PropTypes.string,
   email: PropTypes.string.isRequired,
