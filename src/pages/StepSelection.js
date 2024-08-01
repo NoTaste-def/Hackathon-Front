@@ -67,6 +67,7 @@ const StepSelection = ({ selec, setSelec, csrfToken }) => {
         {
           withCredentials: true,
           headers: { "X-CSRFToken": csrfToken },
+          Accept: "application/json",
         }
       );
       console.log("Data saved successfully.");
