@@ -61,7 +61,16 @@ const StepSelection = ({ selec, setSelec }) => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post(`${URL}/save-user-todo/`, { user_todo: selec });
+      await axios.post(
+        `${URL}/save-user-todo/`,
+        { user_todo: selec },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, // 필요한 경우
+        }
+      );
       console.log("Data saved successfully.");
     } catch (error) {
       console.error("Error saving data:", error);
