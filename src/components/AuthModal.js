@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
+import getCsrfToken from "./getCsrfToken";
 
 const URL =
   "https://port-0-likelion-hackathon-lxmynpl6f586b2fd.sel5.cloudtype.app";
@@ -27,15 +28,23 @@ const AuthModal = ({
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    const csrfToken = await getCsrfToken();
 
     if (type === "login") {
       setIsSubmitting(true); // 요청 시작 시 버튼 비활성화
 
       try {
-        const response = await axios.post(`${URL}/login/`, {
-          user_email: email,
-          password: password,
-        });
+        const response = await axios.post(
+          `${URL}/login/`,
+          {
+            user_email: email,
+            password: password,
+          },
+          {
+            withCredentials: true,
+            headers: { "X-CSRFToken": csrfToken },
+          }
+        );
 
         // 서버 응답 데이터 추출
         const {
@@ -79,11 +88,18 @@ const AuthModal = ({
       setIsSubmitting(true); // 요청 시작 시 버튼 비활성화
 
       try {
-        const response = await axios.post(`${URL}/register/`, {
-          user_email: email,
-          password: password,
-          nickname: nickname,
-        });
+        const response = await axios.post(
+          `${URL}/register/`,
+          {
+            user_email: email,
+            password: password,
+            nickname: nickname,
+          },
+          {
+            withCredentials: true,
+            headers: { "X-CSRFToken": csrfToken },
+          }
+        );
         alert("회원가입 성공!");
         handleSubmit();
       } catch (error) {
