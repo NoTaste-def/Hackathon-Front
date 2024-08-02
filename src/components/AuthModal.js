@@ -39,11 +39,6 @@ const AuthModal = ({
           { user_email: email, password: password },
           {
             withCredentials: true,
-            headers: {
-              "X-Csrftoken": csrfToken, // 가져온 CSRF 토큰을 헤더에 추가
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
           }
         );
 

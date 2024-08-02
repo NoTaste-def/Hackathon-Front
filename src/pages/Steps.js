@@ -31,10 +31,6 @@ const Steps = ({ selec, csrfToken, setCsrfToken }) => {
     axios
       .get(`${URL}/read-user-todo/`, {
         withCredentials: true,
-        headers: {
-          "X-Csrftoken": csrfToken,
-          Accept: "application/json",
-        },
       })
       .then((res) => {
         console.log(res.data);
