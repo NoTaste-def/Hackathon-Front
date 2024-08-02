@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import getCsrfToken from "./getCsrfToken";
-import getCookie from "./getCookie";
 
 const URL =
   "https://port-0-likelion-hackathon-lxmynpl6f586b2fd.sel5.cloudtype.app";
