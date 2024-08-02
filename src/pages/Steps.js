@@ -35,7 +35,7 @@ const Steps = ({ selec, csrfToken, setCsrfToken }) => {
         .get(`${URL}/read-user-todo/`, {
           withCredentials: true,
           headers: {
-            "X-CRSFToken": csrfToken,
+            "X-CSRFToken": csrfToken,
           },
         })
         .then((res) => {

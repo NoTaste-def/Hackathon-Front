@@ -60,12 +60,12 @@ const StepSelection = ({ selec, setSelec, csrfToken, setCsrfToken }) => {
     navigate(-1);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     try {
       // CSRF 토큰을 가져오기 위한 요청
       const csrfToken = getCookie("csrftoken");
 
-      await axios.post(
+      axios.post(
         `${URL}/save-user-todo/`,
         { user_todo: selec },
         {
