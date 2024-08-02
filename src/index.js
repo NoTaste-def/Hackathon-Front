@@ -4,11 +4,6 @@ import "./index.css";
 import App from "./App.js";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import axios from "axios";
-import getCookie from "./components/getCookie.js";
-
-axios.defaults.xsrfCookieName = "csrftoken";
-axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
