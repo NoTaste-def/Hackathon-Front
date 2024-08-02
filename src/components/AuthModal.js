@@ -54,7 +54,9 @@ const AuthModal = ({
         } = response.data;
 
         alert("로그인 성공!");
-        axios.defaults.headers.common["X-CSRFToken"] = getCookie("XSRF-TOKEN");
+        axios.defaults.headers.common["X-CSRFToken"] = await getCookie(
+          "XSRF-TOKEN"
+        );
 
         handleSubmit({
           badges,
