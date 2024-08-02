@@ -29,9 +29,7 @@ const Steps = ({ selec, csrfToken, setCsrfToken }) => {
 
   useEffect(() => {
     axios
-      .get(`${URL}/read-user-todo/`, {
-        withCredentials: true,
-      })
+      .get(`${URL}/read-user-todo/`)
       .then((res) => {
         console.log(res.data);
         setData(res.data);

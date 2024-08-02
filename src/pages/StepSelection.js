@@ -44,6 +44,8 @@ const data = [
 const StepSelection = ({ selec, setSelec, csrfToken, setCsrfToken }) => {
   const navigate = useNavigate();
 
+  // Axios 인터셉터 설정
+
   const handleClick = (name) => {
     setSelec((prev) => {
       if (prev.includes(name)) {
@@ -64,13 +66,7 @@ const StepSelection = ({ selec, setSelec, csrfToken, setCsrfToken }) => {
     try {
       // CSRF 헤더를 설정합니다
 
-      await axios.post(
-        `${URL}/save-user-todo/`,
-        { user_todo: selec },
-        {
-          withCredentials: true,
-        }
-      );
+      await axios.post(`${URL}/save-user-todo/`, { user_todo: selec });
       console.log("Data saved successfully.");
     } catch (error) {
       console.error("Error saving data:", error);
