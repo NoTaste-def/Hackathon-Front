@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import getCsrfToken from "./getCsrfToken";
+import getCookie from "./getCookie";
 
 const URL =
   "https://port-0-likelion-hackathon-lxmynpl6f586b2fd.sel5.cloudtype.app";
@@ -53,6 +54,7 @@ const AuthModal = ({
         } = response.data;
 
         alert("로그인 성공!");
+        axios.defaults.headers.common["X-CSRFToken"] = getCookie("XSRF-TOKEN");
 
         handleSubmit({
           badges,
@@ -74,11 +76,6 @@ const AuthModal = ({
           { user_email: email, password: password, nickname: nickname },
           {
             withCredentials: true,
-            headers: {
-              "X-Csrftoken": csrfToken, // 가져온 CSRF 토큰을 헤더에 추가
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
           }
         );
 
