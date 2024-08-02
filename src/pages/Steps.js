@@ -4,7 +4,7 @@ import PlusBtn from "../components/PlusBtn";
 import TodoBtn from "../components/TodoBtn";
 import style from "./Steps.module.css";
 import axios from "axios";
-import Cookies from "js-cookie";
+import getCookie from "../components/getCookie";
 
 // 빈칸을 나타낼 리스트, 이미 선택된 항목에 대한 리스트를 적절히 활용.
 // 선택 항목 리스트
@@ -28,13 +28,14 @@ const Steps = ({ selec, csrfToken, setCsrfToken }) => {
   };
 
   useEffect(() => {
-    const token = Cookies.get("csrftoken"); // 쿠키에서 CSRF 토큰을 가져옵니다.
-    if (token) {
+    const csrfToken = getCookie("csrftoken");
+
+    if (csrfToken) {
       axios
         .get(`${URL}/read-user-todo/`, {
           withCredentials: true,
           headers: {
-            "X-CRSFToken": token,
+            "X-CRSFToken": csrfToken,
           },
         })
         .then((res) => {

@@ -3,7 +3,6 @@ import style from "./StepSelection.module.css";
 import TodoBtn from "../components/TodoBtn";
 import { useNavigate } from "react-router";
 import axios from "axios";
-import Cookies from "js-cookie";
 
 import 유산소 from "../image/btn/유산소 운동하기.png";
 import 명상 from "../image/btn/명상하기.png";
@@ -64,7 +63,7 @@ const StepSelection = ({ selec, setSelec, csrfToken, setCsrfToken }) => {
   const handleSubmit = async () => {
     try {
       // CSRF 토큰을 가져오기 위한 요청
-      const csrfToken = Cookies.get("csrftoken");
+      const csrfToken = getCookie("csrftoken");
 
       await axios.post(
         `${URL}/save-user-todo/`,
