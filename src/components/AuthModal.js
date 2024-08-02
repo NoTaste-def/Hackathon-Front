@@ -21,6 +21,8 @@ const AuthModal = ({
   handleNicknameChange,
   handleSubmit,
   openSignupModal,
+  csrfToken,
+  setCsrfToken,
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false); // 추가된 상태
 
@@ -31,8 +33,6 @@ const AuthModal = ({
     setIsSubmitting(true);
 
     try {
-      const csrfToken = await getCsrfToken();
-
       if (type === "login") {
         const response = await axios.post(
           `${URL}/login/`,
@@ -225,6 +225,8 @@ AuthModal.propTypes = {
   handleNicknameChange: PropTypes.func,
   handleSubmit: PropTypes.func.isRequired,
   openSignupModal: PropTypes.func,
+  csrfToken: PropTypes.string,
+  setCsrfToken: PropTypes.func,
 };
 
 export default AuthModal;

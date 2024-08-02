@@ -41,12 +41,8 @@ const data = [
   { name: "마사지 받기", img: null },
 ];
 
-const StepSelection = ({ selec, setSelec, csrfToken }) => {
+const StepSelection = ({ selec, setSelec, csrfToken, setCsrfToken }) => {
   const navigate = useNavigate();
-
-  const getCsrfToken = () => {
-    return getCookie("csrftoken");
-  };
 
   const axiosInst = axios.create({
     withCredentials: true,
@@ -54,7 +50,6 @@ const StepSelection = ({ selec, setSelec, csrfToken }) => {
 
   // CSRF 토큰을 설정하는 함수
   const setCsrfHeader = (axiosInstance) => {
-    const csrfToken = getCsrfToken();
     axiosInstance.defaults.headers.common["X-CSRFToken"] = csrfToken;
   };
 

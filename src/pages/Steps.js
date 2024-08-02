@@ -19,7 +19,7 @@ const empty = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const URL =
   "https://port-0-likelion-hackathon-lxmynpl6f586b2fd.sel5.cloudtype.app";
 
-const Steps = ({ selec, csrfToken }) => {
+const Steps = ({ selec, csrfToken, setCsrfToken }) => {
   const [isOn, setIsOn] = useState(false);
   const [data, setData] = useState();
 
@@ -28,14 +28,11 @@ const Steps = ({ selec, csrfToken }) => {
   };
 
   useEffect(() => {
-    const csrf = getCookie("csrftoken");
-    console.log(csrf);
-
     axios
       .get(`${URL}/read-user-todo/`, {
         withCredentials: true,
         headers: {
-          "X-CSRFToken": csrf,
+          "X-CSRFToken": csrfToken,
           Accept: "application/json",
         },
       })
