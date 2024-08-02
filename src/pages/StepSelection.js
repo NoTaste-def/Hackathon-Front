@@ -50,7 +50,7 @@ const StepSelection = ({ selec, setSelec, csrfToken, setCsrfToken }) => {
 
   // CSRF 토큰을 설정하는 함수
   const setCsrfHeader = (axiosInstance) => {
-    axiosInstance.defaults.headers.common["X-CSRFToken"] = csrfToken;
+    axiosInstance.defaults.headers.common["X-Csrftoken"] = csrfToken;
   };
 
   useEffect(() => {

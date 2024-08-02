@@ -40,7 +40,7 @@ const AuthModal = ({
           {
             withCredentials: true,
             headers: {
-              "X-CSRFToken": csrfToken, // 가져온 CSRF 토큰을 헤더에 추가
+              "X-Csrftoken": csrfToken, // 가져온 CSRF 토큰을 헤더에 추가
               Accept: "application/json",
               "Content-Type": "application/json",
             },
@@ -80,7 +80,7 @@ const AuthModal = ({
           {
             withCredentials: true,
             headers: {
-              "X-CSRFToken": csrfToken, // 가져온 CSRF 토큰을 헤더에 추가
+              "X-Csrftoken": csrfToken, // 가져온 CSRF 토큰을 헤더에 추가
               Accept: "application/json",
               "Content-Type": "application/json",
             },
