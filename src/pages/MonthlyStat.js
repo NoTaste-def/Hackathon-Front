@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { format } from "date-fns";
 
 import 느림이 from "../image/느림이1.png";
@@ -24,10 +24,12 @@ import useCalendar from "../components/useCalendar";
 import Calendar from "../components/Calendar"; // Calendar 컴포넌트를 임포트
 import SmallCalendar from "../components/SmallCalendar";
 import calculateTodoStats from "../components/todostat";
+import Cookies from "js-cookie";
 
 import "./MonthlyStat.css";
 import "./Monthly/top.css";
 import "./Monthly/calendar_img.css";
+import axios from "axios";
 
 const MonthlyStat = ({ csrfToken }) => {
   const todos = {
@@ -54,6 +56,14 @@ const MonthlyStat = ({ csrfToken }) => {
       carouselRef.current.scrollBy({ left: 300, behavior: "smooth" });
     }
   };
+
+  useEffect(() => {
+    const token = Cookies.get("csrftoken"); // 쿠키에서 CSRF 토큰을 가져옵니다.
+    if (token) {
+      // setCsrfToken(token); // 상태에 토큰을 설정합니다.
+      axios.defaults.headers.common["X-CSRFToken"] = token; // Axios 헤더에 토큰을 설정합니다.
+    }
+  }, []);
 
   const top = [
     {

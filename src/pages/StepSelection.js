@@ -3,6 +3,7 @@ import style from "./StepSelection.module.css";
 import TodoBtn from "../components/TodoBtn";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 import 유산소 from "../image/btn/유산소 운동하기.png";
 import 명상 from "../image/btn/명상하기.png";
@@ -44,7 +45,13 @@ const data = [
 const StepSelection = ({ selec, setSelec, csrfToken, setCsrfToken }) => {
   const navigate = useNavigate();
 
-  // Axios 인터셉터 설정
+  useEffect(() => {
+    const token = Cookies.get("csrftoken"); // 쿠키에서 CSRF 토큰을 가져옵니다.
+    if (token) {
+      // setCsrfToken(token); // 상태에 토큰을 설정합니다.
+      axios.defaults.headers.common["X-CSRFToken"] = token; // Axios 헤더에 토큰을 설정합니다.
+    }
+  }, []);
 
   const handleClick = (name) => {
     setSelec((prev) => {
