@@ -51,12 +51,13 @@ const AuthModal = ({
           nickname,
           title,
           user_email,
+          csrfToken, // 서버 응답에서 CSRF 토큰을 받아옵니다.
         } = response.data;
 
+        // 로그인 성공 후 CSRF 토큰을 업데이트합니다.
+        axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
+
         alert("로그인 성공!");
-        axios.defaults.headers.common["X-CSRFToken"] = await getCookie(
-          "XSRF-TOKEN"
-        );
 
         handleSubmit({
           badges,
