@@ -21,8 +21,6 @@ const AuthModal = ({
   handleNicknameChange,
   handleSubmit,
   openSignupModal,
-  csrfToken,
-  setCsrfToken,
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false); // 추가된 상태
 
@@ -33,8 +31,7 @@ const AuthModal = ({
     setIsSubmitting(true);
 
     try {
-      const token = await getCsrfToken();
-      setCsrfToken(token);
+      const csrfToken = await getCsrfToken();
 
       if (type === "login") {
         const response = await axios.post(
@@ -42,6 +39,11 @@ const AuthModal = ({
           { user_email: email, password: password },
           {
             withCredentials: true,
+            headers: {
+              "X-CSRFToken": csrfToken, // 가져온 CSRF 토큰을 헤더에 추가
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
           }
         );
 
@@ -77,6 +79,11 @@ const AuthModal = ({
           { user_email: email, password: password, nickname: nickname },
           {
             withCredentials: true,
+            headers: {
+              "X-CSRFToken": csrfToken, // 가져온 CSRF 토큰을 헤더에 추가
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
           }
         );
 
@@ -218,8 +225,6 @@ AuthModal.propTypes = {
   handleNicknameChange: PropTypes.func,
   handleSubmit: PropTypes.func.isRequired,
   openSignupModal: PropTypes.func,
-  csrfToken: PropTypes.string,
-  setCsrfToken: PropTypes.func,
 };
 
 export default AuthModal;
