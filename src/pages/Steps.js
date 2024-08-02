@@ -30,21 +30,21 @@ const Steps = ({ selec, csrfToken, setCsrfToken }) => {
   useEffect(() => {
     const token = Cookies.get("csrftoken"); // 쿠키에서 CSRF 토큰을 가져옵니다.
     if (token) {
-      // setCsrfToken(token); // 상태에 토큰을 설정합니다.
-      axios.defaults.headers.common["X-CSRFToken"] = token; // Axios 헤더에 토큰을 설정합니다.
+      axios
+        .get(`${URL}/read-user-todo/`, {
+          withCredentials: true,
+          headers: {
+            "X-CRSFToken": token,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          setData(res.data);
+        })
+        .catch((e) => {
+          console.log("err", e);
+        });
     }
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(`${URL}/read-user-todo/`)
-      .then((res) => {
-        console.log(res.data);
-        setData(res.data);
-      })
-      .catch((e) => {
-        console.log("err", e);
-      });
   }, []);
 
   return (
