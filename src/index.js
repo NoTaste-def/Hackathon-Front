@@ -9,7 +9,7 @@ import getCookie from "./components/getCookie.js";
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
-axios.defaults.headers.common["X-CSRFToken"] = getCookie("csrftoken");
+axios.defaults.headers.common["X-CSRFToken"] = getCookie("XSRF-TOKEN");
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
