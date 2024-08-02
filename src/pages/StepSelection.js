@@ -18,6 +18,7 @@ import 발효식품 from "../image/btn/발효식품 먹기.png";
 import 식사 from "../image/btn/아침 식사하기.png";
 import 샐러드 from "../image/btn/샐러드 먹기.png";
 import 생선 from "../image/btn/생선 먹기.png";
+import getCookie from "../components/getCookie";
 
 const URL =
   "https://port-0-likelion-hackathon-lxmynpl6f586b2fd.sel5.cloudtype.app";
@@ -66,7 +67,10 @@ const StepSelection = ({ selec, setSelec, csrfToken }) => {
         { user_todo: selec },
         {
           withCredentials: true,
-          headers: { "X-CSRFToken": csrfToken, Accept: "application/json" },
+          headers: {
+            "X-CSRFToken": getCookie("csrftoken"),
+            Accept: "application/json",
+          },
         }
       );
       console.log("Data saved successfully.");

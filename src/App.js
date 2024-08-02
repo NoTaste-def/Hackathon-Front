@@ -92,14 +92,15 @@ const App = () => {
     alert("로그아웃 되었습니다.");
   };
 
-  useEffect(() => {
-    const initializeCsrfToken = async () => {
-      const token = await getCsrfToken();
-      setCsrfToken(token);
-    };
+  // useEffect(() => {
+  //   const initializeCsrfToken = async () => {
+  //     const token = await getCsrfToken();
+  //     console.log(token);
+  //     setCsrfToken(token);
+  //   };
 
-    initializeCsrfToken();
-  }, []);
+  //   initializeCsrfToken();
+  // }, []);
 
   return (
     <div className="app">

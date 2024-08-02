@@ -42,7 +42,6 @@ const AuthModal = ({
           { user_email: email, password: password },
           {
             withCredentials: true,
-            headers: { "X-CSRFToken": csrfToken, Accept: "application/json" },
           }
         );
 
@@ -78,7 +77,6 @@ const AuthModal = ({
           { user_email: email, password: password, nickname: nickname },
           {
             withCredentials: true,
-            headers: { "X-CSRFToken": csrfToken, Accept: "application/json" },
           }
         );
 
