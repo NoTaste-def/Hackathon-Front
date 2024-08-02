@@ -7,23 +7,32 @@ import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
 import getCookie from "./components/getCookie.js";
 
-// CSRF 토큰을 가져오고 Axios 기본 설정을 적용하는 함수
+const URL =
+  "https://port-0-likelion-hackathon-lxmynpl6f586b2fd.sel5.cloudtype.app/csrf-token/";
+
+// CSRF 토큰을 가져와서 Axios 설정
 async function setupAxios() {
-  const csrfToken = await getCookie("csrftoken");
-  axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
-  axios.defaults.withCredentials = true; // 쿠키를 포함한 요청을 보낼 수 있게 설정
+  try {
+    const response = await axios.get(URL);
+    const csrfToken = response.data.csrfToken;
+
+    // Axios 기본 헤더 설정
+    axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
+  } catch (error) {
+    console.error("Failed to fetch CSRF token:", error);
+  }
 }
 
-// 애플리케이션 초기화 시 CSRF 설정을 적용합니다.
-setupAxios().then(() => {
-  const root = ReactDOM.createRoot(document.getElementById("root"));
+// 애플리케이션 초기화 시에 호출합니다.
+setupAxios();
 
-  root.render(
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  );
-});
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
