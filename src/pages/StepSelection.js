@@ -44,6 +44,14 @@ const data = [
 const StepSelection = ({ selec, setSelec, csrfToken }) => {
   const navigate = useNavigate();
 
+  const axiosInst = axios.create({
+    withCredentials: true,
+    headers: {
+      "X-CSRFToken": getCookie("csrftoken"),
+      Accept: "application/json",
+    },
+  });
+
   const handleClick = (name) => {
     setSelec((prev) => {
       if (prev.includes(name)) {
@@ -62,17 +70,7 @@ const StepSelection = ({ selec, setSelec, csrfToken }) => {
 
   const handleSubmit = async () => {
     try {
-      await axios.post(
-        `${URL}/save-user-todo/`,
-        { user_todo: selec },
-        {
-          withCredentials: true,
-          headers: {
-            "X-CSRFToken": getCookie("csrftoken"),
-            Accept: "application/json",
-          },
-        }
-      );
+      await axiosInst.post(`${URL}/save-user-todo/`, { user_todo: selec });
       console.log("Data saved successfully.");
       console.log(csrfToken);
     } catch (error) {

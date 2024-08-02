@@ -23,19 +23,21 @@ const Steps = ({ selec, csrfToken }) => {
   const [isOn, setIsOn] = useState(false);
   const [data, setData] = useState();
 
+  const axiosInst = axios.create({
+    withCredentials: true,
+    headers: {
+      "X-CSRFToken": getCookie("csrftoken"),
+      Accept: "application/json",
+    },
+  });
+
   const handleClick = () => {
     setIsOn(true);
   };
 
   useEffect(() => {
-    axios
-      .get(`${URL}/read-user-todo/`, {
-        withCredentials: true,
-        headers: {
-          "X-CSRFToken": getCookie("csrftoken"),
-          Accept: "application/json",
-        },
-      })
+    axiosInst
+      .get(`${URL}/read-user-todo/`)
       .then((res) => {
         console.log(res.data);
         setData(res.data);
