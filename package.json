@@ -2,6 +2,7 @@
   "name": "the_art_of_slowness",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://port-0-likelion-hackathon-lxmynpl6f586b2fd.sel5.cloudtype.app",
   "dependencies": {
     "@react-oauth/google": "^0.12.1",
     "@testing-library/jest-dom": "^5.17.0",
