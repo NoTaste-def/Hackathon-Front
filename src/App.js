@@ -35,8 +35,6 @@ const App = () => {
 
   const [selec, setSelec] = useState([]);
 
-  const [csrfToken, setCsrfToken] = useState(null); // CSRF 토큰 상태
-
   const openLoginModal = () => setIsLoginModalOpen(true);
   const closeLoginModal = () => {
     setEmail("");
@@ -123,23 +121,11 @@ const App = () => {
               />
             }
           />
-          <Route
-            path="/steps"
-            element={<Steps selec={selec} csrfToken={csrfToken} />}
-          />
-          <Route
-            path="/monthly-stats"
-            element={<MonthlyStats csrfToken={csrfToken} />}
-          />
+          <Route path="/steps" element={<Steps selec={selec} />} />
+          <Route path="/monthly-stats" element={<MonthlyStats />} />
           <Route
             path="/step-selection"
-            element={
-              <StepSelection
-                selec={selec}
-                setSelec={setSelec}
-                csrfToken={csrfToken}
-              />
-            }
+            element={<StepSelection selec={selec} setSelec={setSelec} />}
           />
           <Route path="/test" element={<TodoBtn />} />
         </Routes>
@@ -158,8 +144,6 @@ const App = () => {
         handleEmailChange={(e) => setEmail(e.target.value)}
         handleSubmit={handleLoginSubmit}
         openSignupModal={openSignupModal}
-        csrfToken={csrfToken}
-        setCsrfToken={setCsrfToken}
       />
 
       <AuthModal
@@ -176,8 +160,6 @@ const App = () => {
         handleEmailChange={(e) => setEmail(e.target.value)}
         handleNicknameChange={(e) => setNickname(e.target.value)}
         handleSubmit={handleSignupSubmit}
-        csrfToken={csrfToken}
-        setCsrfToken={setCsrfToken}
       />
     </div>
   );

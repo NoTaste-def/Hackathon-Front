@@ -44,13 +44,24 @@ const data = [
 const StepSelection = ({ selec, setSelec, csrfToken }) => {
   const navigate = useNavigate();
 
+  const getCsrfToken = () => {
+    return getCookie("csrftoken");
+  };
+
   const axiosInst = axios.create({
     withCredentials: true,
-    headers: {
-      "X-CSRFToken": getCookie("csrftoken"),
-      Accept: "application/json",
-    },
   });
+
+  // CSRF 토큰을 설정하는 함수
+  const setCsrfHeader = (axiosInstance) => {
+    const csrfToken = getCsrfToken();
+    axiosInstance.defaults.headers.common["X-CSRFToken"] = csrfToken;
+  };
+
+  useEffect(() => {
+    // CSRF 헤더를 설정합니다.
+    setCsrfHeader(axiosInst);
+  }, []);
 
   const handleClick = (name) => {
     setSelec((prev) => {
@@ -70,9 +81,11 @@ const StepSelection = ({ selec, setSelec, csrfToken }) => {
 
   const handleSubmit = async () => {
     try {
+      // CSRF 헤더를 설정합니다.
+      setCsrfHeader(axiosInst);
+
       await axiosInst.post(`${URL}/save-user-todo/`, { user_todo: selec });
       console.log("Data saved successfully.");
-      console.log(csrfToken);
     } catch (error) {
       console.error("Error saving data:", error);
     }
