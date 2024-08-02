@@ -18,7 +18,6 @@ import Steps from "./pages/Steps";
 import StepSelection from "./pages/StepSelection";
 import SelectionConfirmModal from "./components/SelectionConfirmModal";
 import TodoBtn from "./components/TodoBtn";
-import getCsrfToken from "./components/getCsrfToken";
 
 const App = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);

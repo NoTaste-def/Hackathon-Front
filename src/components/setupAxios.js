@@ -1,6 +1,3 @@
-import React from "react";
-
-// setupAxios.js
 import axios from "axios";
 
 // CSRF 토큰을 Axios의 기본 헤더에 설정하는 함수
