@@ -1,4 +1,4 @@
-async function getCookie(name) {
+function getCookie(name) {
   // 쿠키를 문자열로 가져옵니다.
   const cookies = document.cookie.split(";");
 
