@@ -72,12 +72,12 @@
   position: relative;
   width: 20%;
   top: 8%;
-  left: -43%;
+  left: -30%;
 }
 
 .calendar-small.fastfood span {
   top: -5%;
-  left: 31%;
+  left: 36%;
   font-size: 30px;
 }
 
@@ -110,7 +110,7 @@
 
 .calendar-small.coffee span {
   top: -5%;
-  left: 26%;
+  left: 40%;
   font-size: 30px;
 }
 
@@ -118,5 +118,5 @@
   position: relative;
   width: 20%;
   top: 8%;
-  left: -52%;
+  left: -20%;
 }
