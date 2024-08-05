@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import style from "./TodoBtn.module.css";
-import SelectionConfirmModal from "./SelectionConfirmModal";
 
 const TodoBtn = ({ img, text, onClick, isOn }) => {
   const [clicked, setClicked] = useState(false);
@@ -18,7 +17,6 @@ const TodoBtn = ({ img, text, onClick, isOn }) => {
       {/* <button className={style.moreBtn} /> */}
       <img className={style.btnImg} src={img} />
       <span className={style.btnName}>{text}</span>
-      {isOn ? <SelectionConfirmModal /> : null}
     </div>
   );
 };

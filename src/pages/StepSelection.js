@@ -18,12 +18,11 @@ import 발효식품 from "../image/btn/발효식품 먹기.png";
 import 식사 from "../image/btn/아침 식사하기.png";
 import 샐러드 from "../image/btn/샐러드 먹기.png";
 import 생선 from "../image/btn/생선 먹기.png";
-import getCookie from "../components/getCookie";
 
 const URL =
   "https://port-0-likelion-hackathon-lxmynpl6f586b2fd.sel5.cloudtype.app";
 
-const data = [
+const initialData = [
   { name: "물 8컵 마시기", img: 물 },
   { name: "아침 식사하기", img: 식사 },
   { name: "샐러드 먹기", img: 샐러드 },
@@ -42,51 +41,95 @@ const data = [
 ];
 
 const StepSelection = ({ selec, setSelec, csrfToken, setCsrfToken }) => {
+  const [filteredData, setFilteredData] = useState(initialData);
   const navigate = useNavigate();
 
-  const handleClick = (name) => {
-    setSelec((prev) => {
-      if (prev.includes(name)) {
-        console.log(name, "삭제");
-        return prev.filter((item) => item !== name);
-      } else {
-        console.log(name, "추가");
-        return [...prev, name];
-      }
-    });
+  const toSteps = () => {
+    window.location.href = "/steps";
   };
 
   const toBack = () => {
     navigate(-1);
   };
 
-  const handleSubmit = () => {
-    try {
-      // CSRF 토큰을 가져오기 위한 요청
-      const csrfToken = getCookie("csrftoken");
+  const handleClick = (name) => {
+    setSelec((prev) => {
+      if (prev.includes(name)) {
+        return prev.filter((item) => item !== name);
+      } else {
+        return [...prev, name];
+      }
+    });
+  };
 
-      axios.post(
+  const handleSubmit = async () => {
+    try {
+      const userId = localStorage.getItem("userid");
+
+      if (!userId) {
+        throw new Error("User ID not found in local storage");
+      }
+
+      const response = await axios.post(
         `${URL}/save-user-todo/`,
         { user_todo: selec },
         {
           withCredentials: true,
           headers: {
-            "X-CSRFToken": csrfToken,
+            "X-User-Id": userId,
           },
         }
       );
-      console.log("Data saved successfully.");
+
+      console.log("Data saved successfully:", response.data);
     } catch (error) {
       console.error("Error saving data:", error);
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userId = localStorage.getItem("userid");
+
+        if (!userId) {
+          throw new Error("User ID not found in local storage");
+        }
+
+        const response = await axios.get(`${URL}/read-user-todo/`, {
+          withCredentials: true,
+          headers: { "X-User-Id": userId },
+        });
+
+        // Extract user_todo items from the response
+        const userTodos = response.data.flatMap((item) => item.user_todo);
+
+        // Filter out items from initialData that are present in userTodos
+        const filtered = initialData.filter(
+          (item) => !userTodos.includes(item.name)
+        );
+
+        setFilteredData(filtered);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className={style.flexWrapper}>
       <div className={style.selectionWrapper}>
         <nav className={style.navbar}>
           <button className={style.backBtn} onClick={toBack} />
-          <button className={style.completionBtn} onClick={handleSubmit} />
+          <button
+            className={style.completionBtn}
+            onClick={() => {
+              handleSubmit();
+              toSteps();
+            }}
+          />
         </nav>
         <aside className={style.noticeWrapper}>
           <div className={style.notice}>
@@ -97,12 +140,14 @@ const StepSelection = ({ selec, setSelec, csrfToken, setCsrfToken }) => {
           </div>
         </aside>
         <main className={style.steps_control}>
-          {data.map((now, i) => (
+          {filteredData.map((now, i) => (
             <TodoBtn
               key={i}
               img={now.img}
               text={now.name}
-              onClick={() => handleClick(now.name)}
+              onClick={() => {
+                handleClick(now.name);
+              }}
             />
           ))}
         </main>

@@ -23,7 +23,8 @@ const AuthModal = ({
   csrfToken,
   setCsrfToken,
 }) => {
-  const [isSubmitting, setIsSubmitting] = useState(false); // 추가된 상태
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [validate, setValidate] = useState();
 
   if (!isOpen) return null;
 
@@ -33,55 +34,56 @@ const AuthModal = ({
 
     try {
       if (type === "login") {
-        const response = await axios.post(
-          `${URL}/login/`,
-          { user_email: email, password: password },
-          {
-            withCredentials: true,
-          }
-        );
+        await axios
+          .post(
+            `${URL}/login/`,
+            { user_email: email, password: password },
+            {
+              withCredentials: true,
+            }
+          )
+          .then((res) => {
+            // 로그인 성공 시 user_id를 로컬 저장소에 저장
+            localStorage.setItem("userid", res.data.user_id);
+            localStorage.setItem("nick", res.data.nickname);
+            localStorage.setItem("level", res.data.level);
+            localStorage.setItem("badge", res.data.badges);
+            localStorage.setItem("title", res.data.title);
+            localStorage.setItem("loginat", res.data.login_at);
+            setValidate(res.data.user_id);
 
-        const {
-          badges,
-          level,
-          login_at,
-          message,
-          nickname,
-          title,
-          user_email,
-          csrfToken, // 서버 응답에서 CSRF 토큰을 받아옵니다.
-        } = response.data;
+            const { badges, level, login_at, nickname, title } = res.data;
+            alert("로그인 성공!");
 
-        // 로그인 성공 후 CSRF 토큰을 업데이트합니다.
-        axios.defaults.headers.common["X-CSRFToken"] = csrfToken;
-
-        alert("로그인 성공!");
-
-        handleSubmit({
-          badges,
-          level,
-          login_at,
-          message,
-          nickname,
-          title,
-          user_email,
-        });
+            handleSubmit({
+              badges,
+              level,
+              login_at,
+              nickname,
+              title,
+              user_id: res.data.user_id,
+            });
+          });
       } else if (type === "signup") {
         if (password !== passwordConfirm) {
           alert("비밀번호가 일치하지 않습니다.");
           return;
         }
-
-        await axios.post(
-          `${URL}/register/`,
-          { user_email: email, password: password, nickname: nickname },
-          {
-            withCredentials: true,
-          }
-        );
-
-        alert("회원가입 성공!");
-        handleSubmit();
+        await axios
+          .post(
+            `${URL}/register/`,
+            { user_email: email, password: password, nickname: nickname },
+            {
+              withCredentials: true,
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+          .then(() => {
+            alert("회원가입 성공!");
+            handleSubmit();
+          });
       }
     } catch (error) {
       alert(type === "login" ? "로그인 실패!" : "회원가입 실패!");

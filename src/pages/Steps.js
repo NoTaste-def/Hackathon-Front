@@ -4,14 +4,7 @@ import PlusBtn from "../components/PlusBtn";
 import TodoBtn from "../components/TodoBtn";
 import style from "./Steps.module.css";
 import axios from "axios";
-import getCookie from "../components/getCookie";
-
-// 빈칸을 나타낼 리스트, 이미 선택된 항목에 대한 리스트를 적절히 활용.
-// 선택 항목 리스트
-// PlusBtn
-// 빈칸 리스트
-// 의 순서로 배치하여 map 함수를 적절히 활용.
-// 배열의 값만 바꿔주는 것으로 결과가 쉽게 바뀜.
+import CheckBtn from "../components/CheckBtn";
 
 const selected = [];
 const empty = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -28,24 +21,27 @@ const Steps = ({ selec, csrfToken, setCsrfToken }) => {
   };
 
   useEffect(() => {
-    const csrfToken = getCookie("csrftoken");
+    const userId = localStorage.getItem("userid");
 
-    if (csrfToken) {
-      axios
-        .get(`${URL}/read-user-todo/`, {
-          withCredentials: true,
-          headers: {
-            "X-CSRFToken": csrfToken,
-          },
-        })
-        .then((res) => {
-          console.log(res.data);
-          setData(res.data);
-        })
-        .catch((e) => {
-          console.log("err", e);
-        });
+    if (!userId) {
+      throw new Error("User ID not found in local storage");
     }
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${URL}/read-user-todo/`, {
+          withCredentials: true,
+          headers: { "X-User-Id": userId },
+        });
+
+        console.log(response.data);
+        setData(response.data);
+      } catch (error) {
+        console.log("err", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -56,9 +52,11 @@ const Steps = ({ selec, csrfToken, setCsrfToken }) => {
           <h2>7개중 1개 완료</h2>
         </nav>
         <main className={style.steps_control}>
-          {selec.map((a, i) => {
-            return <TodoBtn />;
-          })}
+          {data &&
+            data.length > 0 &&
+            data[0].user_todo.map((item, index) => (
+              <CheckBtn key={index} text={item} />
+            ))}
           <PlusBtn />
           {empty.map((a, i) => {
             return <EmptyBtn />;

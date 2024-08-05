@@ -19,6 +19,9 @@ const Header = ({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Check if the user is logged in and has a userid in localStorage
+  const showLogoutButton = localStorage.getItem("userid");
+
   return (
     <header className={`nav_bar ${isScrolled ? "scrolled" : ""}`}>
       <div className="nav_logo">
@@ -34,7 +37,7 @@ const Header = ({
           <Link to="/monthly-stats">월간 통계</Link>
         </li>
       </ul>
-      {isLoggedIn ? (
+      {showLogoutButton ? (
         <div className="nav_logout">
           <div className="logout" onClick={handleLogout}>
             로그아웃

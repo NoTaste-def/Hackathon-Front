@@ -18,6 +18,10 @@ import Steps from "./pages/Steps";
 import StepSelection from "./pages/StepSelection";
 import SelectionConfirmModal from "./components/SelectionConfirmModal";
 import TodoBtn from "./components/TodoBtn";
+import axios from "axios";
+
+const URL =
+  "https://port-0-likelion-hackathon-lxmynpl6f586b2fd.sel5.cloudtype.app";
 
 const App = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
@@ -59,25 +63,31 @@ const App = () => {
   };
 
   const handleLoginSubmit = (userData) => {
-    const { badges, level, login_at, message, nickname, title, user_email } =
-      userData;
+    const { badges, level, login_at, nickname, title, user_email } = userData;
 
-    // 로그인 성공 알림
-    alert(`${nickname}님 환영합니다`);
+    const validate = localStorage.getItem("userid");
 
     // 상태 업데이트
-    setIsLoggedIn(true);
-    setUserProfile({
-      user_email,
-      nickname,
-      level,
-      badges: badges || null,
-      title: title || null,
-      login_at,
-    });
+    if (validate) {
+      setIsLoggedIn(true);
 
-    // 로그인 모달 닫기
-    closeLoginModal();
+      // 로그인 성공 알림
+      alert(`${nickname}님 환영합니다`);
+
+      setUserProfile({
+        user_email,
+        nickname,
+        level,
+        badges: badges || null,
+        title: title || null,
+        login_at,
+      });
+
+      // 로그인 모달 닫기
+      closeLoginModal();
+    } else {
+      alert("로그인 실패");
+    }
   };
 
   const handleSignupSubmit = () => {
@@ -86,8 +96,25 @@ const App = () => {
   };
 
   const handleLogout = () => {
+    const userId = localStorage.getItem("userid");
+
+    if (!userId) {
+      throw new Error("User ID not found in local storage");
+    }
+
+    axios.post(
+      `${URL}/logout/`,
+      { user_email: email, password: password },
+      {
+        headers: {
+          "X-User-Id": userId,
+        },
+      }
+    );
+    localStorage.clear();
     setIsLoggedIn(false);
     setUserProfile(null);
+    window.location.href = "/";
     alert("로그아웃 되었습니다.");
   };
 
