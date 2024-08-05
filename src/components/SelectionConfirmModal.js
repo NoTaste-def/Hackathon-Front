@@ -6,7 +6,14 @@ import axios from "axios";
 const URL =
   "https://port-0-likelion-hackathon-lxmynpl6f586b2fd.sel5.cloudtype.app";
 
-const SelectionConfirmModal = ({ img, text, onComplete, onClose }) => {
+const SelectionConfirmModal = ({
+  img,
+  text,
+  onComplete,
+  onClose,
+  showModal,
+  setShowModal,
+}) => {
   const userId = localStorage.getItem("userid");
   const login_at = localStorage.getItem("loginat");
 
@@ -42,7 +49,10 @@ const SelectionConfirmModal = ({ img, text, onComplete, onClose }) => {
           <img
             src={CLOSE}
             className={style.closeBtn}
-            onClick={onClose}
+            onClick={(e) => {
+              e.stopPropagation(); // 이벤트 버블링으로 인해 모달 안닫히는 문제 수정
+              onClose();
+            }}
             alt="Close"
           />
         </nav>

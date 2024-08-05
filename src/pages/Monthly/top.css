@@ -44,23 +44,27 @@
   color: #6a737d;
 }
 
+.top-activity-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .top-activity {
   position: relative;
   display: flex;
-  gap: 5%;
   justify-content: space-between;
   border-radius: 15px;
-  margin-top: -5%;
-  margin-left: -25%;
-  width: 1300px;
   padding: 100px;
+  gap: 30px;
 }
 
 .top-activity-card {
   background-color: #adbcc9;
   border-radius: 30px;
   padding: 20px;
-  width: 400px;
+  width: 300px;
   color: #fff;
   text-align: center;
   flex: 1;
@@ -69,163 +73,65 @@
 
 .top-activity-card.fruit {
   background-color: #00c2ff;
-  border-radius: 30px;
-  padding: 20px;
-  width: 400px;
-  color: #fff;
-  text-align: center;
-  flex: 1;
-  margin: 0 10px;
 }
 
 .top-activity-card.muscle {
   background-color: #778488;
-  border-radius: 30px;
-  padding: 20px;
-  width: 400px;
-  color: #fff;
-  text-align: center;
-  flex: 1;
-  margin: 0 10px;
 }
 
 .top-activity-card.walk {
   background-color: #ff6347;
-  border-radius: 30px;
-  padding: 20px;
-  width: 400px;
-  color: #fff;
-  text-align: center;
-  flex: 1;
-  margin: 0 10px;
 }
 
 .top-activity-card.sleep {
   background-color: #72e076;
-  border-radius: 30px;
-  padding: 20px;
-  width: 400px;
-  color: #fff;
-  text-align: center;
-  flex: 1;
-  margin: 0 10px;
 }
 
 .top-activity-card.noalcohol {
   background-color: #f1d744;
-  border-radius: 30px;
-  padding: 20px;
-  width: 400px;
-  color: #fff;
-  text-align: center;
-  flex: 1;
-  margin: 0 10px;
 }
 
 .top-activity-card.salad {
   background-color: #87b687;
-  border-radius: 30px;
-  padding: 20px;
-  width: 400px;
-  color: #fff;
-  text-align: center;
-  flex: 1;
-  margin: 0 10px;
 }
 
 .top-activity-card.water {
   background-color: #1e90ff;
-  border-radius: 30px;
-  padding: 20px;
-  width: 400px;
-  color: #fff;
-  text-align: center;
-  flex: 1;
-  margin: 0 10px;
 }
 
 .top-activity-card.meditation {
   background-color: #a6da2d;
-  border-radius: 30px;
-  padding: 20px;
-  width: 400px;
-  color: #fff;
-  text-align: center;
-  flex: 1;
-  margin: 0 10px;
 }
 
 .top-activity-card.massage {
   background-color: #6a5acd;
-  border-radius: 30px;
-  padding: 20px;
-  width: 400px;
-  color: #fff;
-  text-align: center;
-  flex: 1;
-  margin: 0 10px;
 }
 
 .top-activity-card.fastfood {
   background-color: #dc143c;
-  border-radius: 30px;
-  padding: 20px;
-  width: 400px;
-  color: #fff;
-  text-align: center;
-  flex: 1;
-  margin: 0 10px;
 }
 
 .top-activity-card.stretching {
   background-color: #ff69b4;
-  border-radius: 30px;
-  padding: 20px;
-  width: 400px;
-  color: #fff;
-  text-align: center;
-  flex: 1;
-  margin: 0 10px;
 }
 
 .top-activity-card.nuts {
   background-color: #f1b991;
-  border-radius: 30px;
-  padding: 20px;
-  width: 400px;
-  color: #fff;
-  text-align: center;
-  flex: 1;
-  margin: 0 10px;
 }
 
 .top-activity-card.eat {
   background-color: #ffa500;
-  border-radius: 30px;
-  padding: 20px;
-  width: 400px;
-  color: #fff;
-  text-align: center;
-  flex: 1;
-  margin: 0 10px;
 }
 
 .top-activity-card.coffee {
   background-color: #fab17d;
-  border-radius: 30px;
-  padding: 20px;
-  width: 400px;
-  color: #fff;
-  text-align: center;
-  flex: 1;
-  margin: 0 10px;
 }
 
 .top-activity-card img {
-  top: 5%;
-  left: -39%;
   position: relative;
-  width: 20%;
+  top: 5%;
+  transform: translate(-250%, 100%);
+  width: 80px;
 }
 
 .top-activity-card p {

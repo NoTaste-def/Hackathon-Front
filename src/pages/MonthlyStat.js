@@ -301,20 +301,22 @@ const MonthlyStat = ({ csrfToken }) => {
           </div>
         </section>
 
-        <div className="top-activity">
-          {top
-            .sort((a, b) => b.days - a.days)
-            .slice(0, 3)
-            .map((activity, index) => (
-              <div
-                key={index}
-                className={`top-activity-card ${activity.className}`}
-              >
-                <img src={activity.imgSrc} alt={activity.alt} />
-                <p>{activity.text}</p>
-                <span>{activity.days}일</span>
-              </div>
-            ))}
+        <div className="top-activity-wrapper">
+          <div className="top-activity">
+            {top
+              .sort((a, b) => b.days - a.days)
+              .slice(0, 3)
+              .map((activity, index) => (
+                <div
+                  key={index}
+                  className={`top-activity-card ${activity.className}`}
+                >
+                  <img src={activity.imgSrc} alt={activity.alt} />
+                  <p>{activity.text}</p>
+                  <span>{activity.days}일</span>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </div>
