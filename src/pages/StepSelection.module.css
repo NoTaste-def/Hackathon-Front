@@ -1,3 +1,48 @@
+.allSelectedPageWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+  gap: 20px;
+  white-space: normal;
+}
+.allSelectedPageWrapper > span {
+  font-size: 1.5rem;
+}
+
+.allSelectedPageWrapper > button {
+  margin: 70px;
+  background-color: #0090f4;
+  color: white;
+  font-size: 1.4rem;
+  width: 200px;
+  height: 60px;
+  border: none;
+  border-radius: 30px;
+
+  animation: blink 2s infinite;
+}
+
+.allSelectedPageWrapper > button:active {
+  background-color: #008ef49c;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 0.9rem #0090f4);
+  }
+  50% {
+    filter: drop-shadow(0 0 0.1rem #0090f4);
+  }
+}
+
+.allSelectedPageWrapper > button:hover {
+  color: #effbffb6;
+}
+
 .flexWrapper {
   display: flex;
   flex-direction: column;

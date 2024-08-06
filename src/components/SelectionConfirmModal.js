@@ -11,8 +11,8 @@ const SelectionConfirmModal = ({
   text,
   onComplete,
   onClose,
-  showModal,
-  setShowModal,
+  cnt,
+  setCnt,
 }) => {
   const userId = localStorage.getItem("userid");
   const login_at = localStorage.getItem("loginat");
@@ -35,6 +35,8 @@ const SelectionConfirmModal = ({
       .then((res) => {
         if (res) {
           onComplete(); // Notify CheckBtn to update its state
+          setCnt(cnt + 1);
+          localStorage.setItem("complete_cnt", cnt + 1);
         }
       })
       .catch((error) => {

@@ -36,7 +36,7 @@ const imgData = [
   { name: "마사지 하기", img: 마사지 },
 ];
 
-const CheckBtn = ({ text }) => {
+const CheckBtn = ({ text, cnt, setCnt }) => {
   const [checked, setChecked] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
@@ -63,6 +63,7 @@ const CheckBtn = ({ text }) => {
   const handleComplete = () => {
     setChecked(true);
     setShowModal(false);
+    // localStorage.setItem("completed");
   };
 
   const handleModalClose = () => {
@@ -83,6 +84,8 @@ const CheckBtn = ({ text }) => {
           text={text}
           onComplete={handleComplete}
           onClose={handleModalClose}
+          cnt={cnt}
+          setCnt={setCnt}
         />
       )}
     </div>

@@ -121,6 +121,18 @@ const StepSelection = ({ selec, setSelec, csrfToken, setCsrfToken }) => {
     fetchData();
   }, []);
 
+  if (filteredData.length === 0) {
+    return (
+      <div className={style.allSelectedPageWrapper}>
+        <span>
+          모두 도전하시는군요!
+          <br />더 추가할 항목이 없어요, 대단해요!
+        </span>
+        <button onClick={toBack}>돌아가기</button>
+      </div>
+    );
+  }
+
   return (
     <div className={style.flexWrapper}>
       <div className={style.selectionWrapper}>

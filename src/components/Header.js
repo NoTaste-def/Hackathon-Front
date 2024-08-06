@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../image/logo.png";
 
 const Header = ({
@@ -9,6 +9,7 @@ const Header = ({
   handleLogout,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +23,13 @@ const Header = ({
   // Check if the user is logged in and has a userid in localStorage
   const showLogoutButton = localStorage.getItem("userid");
 
+  const handleLinkClick = (e, path) => {
+    if (!localStorage.getItem("userid")) {
+      e.preventDefault();
+      alert("로그인 이후 이용하실 수 있습니다.");
+    }
+  };
+
   return (
     <header className={`nav_bar ${isScrolled ? "scrolled" : ""}`}>
       <div className="nav_logo">
@@ -31,10 +39,17 @@ const Header = ({
       </div>
       <ul className="nav_main">
         <li>
-          <Link to="/steps">저속노화 발걸음</Link>
+          <Link to="/steps" onClick={(e) => handleLinkClick(e, "/steps")}>
+            저속노화 발걸음
+          </Link>
         </li>
         <li>
-          <Link to="/monthly-stats">월간 통계</Link>
+          <Link
+            to="/monthly-stats"
+            onClick={(e) => handleLinkClick(e, "/monthly-stats")}
+          >
+            월간 통계
+          </Link>
         </li>
       </ul>
       {showLogoutButton ? (
