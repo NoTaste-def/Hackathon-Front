@@ -33,7 +33,7 @@ const Calendar = ({
     <div className="calendar-container">
       <div className="title">
         <button className="nav-button" onClick={goToPreviousMonth}></button>
-        <h1 className="nav-month">{currentDate.getMonth() + 1}월</h1>
+        <h1 className="nav-month">{currentMonth + 1}월</h1>
         <button className="nav-button" onClick={goToNextMonth}></button>
       </div>
       <div className="calendar">
@@ -49,19 +49,14 @@ const Calendar = ({
             {weekCalendarList.map((week, i) => (
               <tr key={i}>
                 {week.map((day, j) => {
-                  // 날짜가 존재하지 않는 경우
-                  if (!day) {
-                    return <td key={j} className="empty"></td>;
-                  }
+                  if (!day) return <td key={j} className="empty"></td>;
+
                   const isToday =
                     today.getDate() === day &&
                     today.getMonth() === currentMonth &&
                     today.getFullYear() === currentYear;
                   const statusClass = getTodoStatusClass(day);
-                  const className =
-                    isToday && statusClass === "completed-100"
-                      ? "completed-100"
-                      : `${statusClass} ${isToday ? "today" : ""}`;
+                  const className = `${statusClass} ${isToday ? "today" : ""}`;
 
                   return (
                     <td key={j} className={className}>
@@ -83,7 +78,7 @@ Calendar.propTypes = {
   currentDate: PropTypes.instanceOf(Date).isRequired,
   goToPreviousMonth: PropTypes.func.isRequired,
   goToNextMonth: PropTypes.func.isRequired,
-  todos: PropTypes.objectOf(PropTypes.number), // { 'YYYY-MM-DD': completionStatus }
+  todos: PropTypes.objectOf(PropTypes.number),
 };
 
 export default Calendar;

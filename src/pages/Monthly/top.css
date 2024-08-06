@@ -177,6 +177,12 @@
   font-weight: lighter;
 }
 
+.top-activity-card.walk img {
+  top: 3%;
+  transform: translate(-250%, 100%);
+  width: 60px;
+}
+
 .top-activity-card span {
   bottom: 5%;
   left: 35%;

@@ -56,15 +56,8 @@
   gap: 100px;
 }
 
-.stat-header .title h1 {
-  font-family: "nanum_bold";
-  font-size: 32px;
-  font-weight: 800;
-  line-height: 35.36px;
-  color: #1a1a1a;
-}
-
 .calendar-container {
+  position: relative;
   margin: 20px 0;
 }
 
@@ -97,26 +90,24 @@
 .nav-button:first-of-type {
   margin-right: 20%;
   background: url("../image/btn/left.png");
+  background-repeat: no-repeat;
 }
 
 .nav-button:last-of-type {
   margin-left: 20%;
   background: url("../image/btn/right.png");
-}
-
-.nav-left {
-  width: 5px;
-  height: 5px;
-  background-color: red;
+  background-repeat: no-repeat;
 }
 
 .calendar {
+  position: relative;
   margin-top: 0px;
 }
 
 .calendar table {
+  height: 100%;
   width: 100%;
-  border-spacing: 35px;
+  border-spacing: 50px;
 }
 
 .calendar th {
@@ -127,8 +118,12 @@
 
 .calendar td {
   height: 60px;
-  width: 130px;
+  width: 5%;
   text-align: center;
+  border: 4px solid;
+  background-color: #0090f4;
+  font-size: 17px;
+  border-radius: 20px;
 }
 
 .calendar th {
@@ -137,13 +132,6 @@
   color: #1a1a1a;
 }
 
-.calendar td {
-  border: 4px solid;
-  font-size: 17px;
-  border-radius: 20px;
-}
-
-/* 상태별 스타일 */
 .calendar td.empty {
   background-color: transparent;
   color: transparent;
@@ -153,29 +141,29 @@
 .calendar td.filled {
   background-color: #fff;
   color: transparent;
-  border: 5px solid #e9eaea;
+  border: 2px solid #e9eaea;
 }
 
 .calendar td.today {
-  color: #ff5c01;
+  background-color: #ff5c01;
   border: 2px solid #ff5c01; /* 오늘 날짜 강조 */
 }
 
 .calendar td.completed-100 {
   background-color: #0090f4;
-  border: 5px solid transparent;
+  border: 2px solid transparent;
   color: transparent;
 }
 
 .calendar td.completed-50 {
   background-color: #00c2ff;
-  border: 5px solid transparent;
+  border: 2px solid transparent;
   color: transparent;
 }
 
 .calendar td.completed-10 {
   background-color: #b5e3f2;
-  border: 5px solid transparent;
+  border: 2px solid transparent;
   color: transparent;
 }
 
@@ -183,7 +171,6 @@
 .calendar td.completed-100.today {
   border: 2px solid rgb(105, 105, 38); /* 오늘 날짜가 100% 완료일 때 강조 */
 }
-
 .small-calendar-container {
   background-color: #ffffff;
   position: relative;
@@ -220,13 +207,18 @@
   border-radius: 13px;
 }
 
-.small-calendar td.filled {
-  background-color: #6a737d; /* 채워진 날짜 배경색 */
-  color: transparent; /* 글자 색상 조정 */
+.small-calendar td.empty {
+  background-color: transparent;
 }
 
-.small-calendar td.empty {
-  background-color: #ffffff; /* 비어있는 날짜 배경색 */
+.small-calendar td.completed {
+  background-color: #6a737d;
+  color: transparent;
+}
+
+.small-calendar td.not-completed {
+  background-color: #e9eaea;
+  color: transparent;
 }
 
 .legend {
@@ -235,6 +227,7 @@
   align-items: center;
   margin-top: 10%;
   margin-bottom: 10%;
+  font-size: 16px;
 }
 
 .legend-item {
@@ -341,7 +334,7 @@
 }
 
 .activity-header span {
-  margin-left: -6%;
+  margin-left: -3%;
   margin-right: 50%;
   flex-shrink: 0;
   color: #6a737d;
@@ -374,15 +367,17 @@
 }
 
 .activity-steps {
-  overflow-x: auto;
+  overflow-x: scroll;
 }
+
 .activity-step {
   display: flex;
   justify-content: space-around; /* 요소 간격 조정 */
   gap: 5%; /* 요소 간격 조정 */
-  height: 5%;
-  padding: 30px;
-  width: 1300px;
+  height: 500px;
+  padding: 10px;
+  white-space: nowrap;
+  width: 100vw;
 }
 
 .calendar-small {
@@ -398,7 +393,6 @@
   font-family: "nanumL1";
   font-weight: 700;
   line-height: 26.52px;
-
   position: relative;
   top: -5%;
   left: 34%;
@@ -410,4 +404,100 @@
   width: 20%;
   top: 8%;
   left: -33%;
+}
+
+@media (max-width: 1185px) {
+  .nav-month {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 1661px) {
+  .calendar table {
+    border-spacing: 35px;
+  }
+}
+
+@media (max-width: 1567px) {
+  .calendar table {
+    border-spacing: 30px;
+    .legend {
+      font-size: 15px;
+    }
+  }
+}
+
+@media (max-width: 1504px) {
+  .calendar table {
+    border-spacing: 25px;
+    .legend {
+      font-size: 13px;
+    }
+  }
+}
+
+@media (max-width: 1480px) {
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 23px; /* 아이템 사이의 간격 조절 */
+  }
+
+  .legend-item {
+    width: 5%;
+    height: 30px;
+    border: 1px solid #bbbbbb;
+    border-radius: 30%;
+    margin: 5px 10px;
+  }
+}
+
+@media (max-width: 1377px) {
+  .calendar table {
+    border-spacing: 20px;
+    .legend {
+      font-size: 11px;
+    }
+  }
+}
+
+@media (max-width: 1251px) {
+  .calendar table {
+    border-spacing: 15px;
+    .legend {
+      font-size: 9px;
+    }
+  }
+}
+
+@media (max-width: 1124px) {
+  .calendar table {
+    border-spacing: 5px;
+    .legend {
+      font-size: 7px;
+    }
+  }
+}
+
+@media (max-width: 998px) {
+  .calendar table {
+    border-spacing: 2px;
+    .legend {
+      font-size: 5px;
+    }
+  }
+}
+
+@media (max-width: 873px) {
+  .calendar table {
+    border-spacing: 1px;
+  }
+  .calendar td {
+    width: 5%;
+    height: 3px;
+  }
+  .legend {
+    font-size: 4px;
+  }
 }

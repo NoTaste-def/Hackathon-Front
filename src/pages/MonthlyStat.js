@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { format } from "date-fns";
 
 import 느림이 from "../image/느림이1.png";
@@ -31,20 +31,118 @@ import "./Monthly/top.css";
 import "./Monthly/calendar_img.css";
 import axios from "axios";
 
-const MonthlyStat = ({ csrfToken }) => {
-  const todos = {
-    "2024-07-30": 100,
-    "2024-07-15": 50,
-    "2024-07-01": 10,
-  };
+const URL =
+  "https://port-0-likelion-hackathon-lxmynpl6f586b2fd.sel5.cloudtype.app/";
 
+const MonthlyStat = ({ csrfToken }) => {
+  const [topActivities, setTopActivities] = useState([
+    {
+      className: "fruit",
+      imgSrc: `${과일}`, // 실제 이미지 경로로 대체
+      alt: "icon",
+      text: "야채주스 마시기",
+      days: 0,
+    },
+    {
+      className: "muscle",
+      imgSrc: `${근력}`, // 실제 이미지 경로로 대체
+      alt: "icon",
+      text: "근력 운동하기",
+      days: 0,
+    },
+    {
+      className: "walk",
+      imgSrc: `${산책}`, // 실제 이미지 경로로 대체
+      alt: "icon",
+      text: "유산소 운동하기",
+      days: 0,
+    },
+    {
+      className: "sleep",
+      imgSrc: `${취침}`, // 실제 이미지 경로로 대체
+      alt: "icon",
+      text: "7시간 이상 잠자기",
+      days: 0,
+    },
+    {
+      className: "bath",
+      imgSrc: `${목욕}`, // 실제 이미지 경로로 대체
+      alt: "icon",
+      text: "목욕하기",
+      days: 0,
+    },
+    {
+      className: "salad",
+      imgSrc: `${샐러드}`, // 실제 이미지 경로로 대체
+      alt: "icon",
+      text: "샐러드 먹기",
+      days: 0,
+    },
+    {
+      className: "water",
+      imgSrc: `${물}`, // 실제 이미지 경로로 대체
+      alt: "icon",
+      text: "물 8컵 마시기",
+      days: 0,
+    },
+    {
+      className: "meditation",
+      imgSrc: `${명상}`, // 실제 이미지 경로로 대체
+      alt: "icon",
+      text: "명상하기",
+      days: 0,
+    },
+    {
+      className: "massage",
+      imgSrc: `${마사지}`, // 실제 이미지 경로로 대체
+      alt: "icon",
+      text: "마사지하기",
+      days: 0,
+    },
+    {
+      className: "fermentation",
+      imgSrc: `${발효식품}`, // 실제 이미지 경로로 대체
+      alt: "icon",
+      text: "발효식품 섭취하기",
+      days: 0,
+    },
+    {
+      className: "stretching",
+      imgSrc: `${스트레칭}`, // 실제 이미지 경로로 대체
+      alt: "icon",
+      text: "스트레칭 하기",
+      days: 0,
+    },
+    {
+      className: "nuts",
+      imgSrc: `${견과류}`, // 실제 이미지 경로로 대체
+      alt: "icon",
+      text: "견과류 섭취하기",
+      days: 0,
+    },
+    {
+      className: "eat",
+      imgSrc: `${식사}`, // 실제 이미지 경로로 대체
+      alt: "icon",
+      text: "아침 식사하기",
+      days: 0,
+    },
+    {
+      className: "protein",
+      imgSrc: `${단백질}`, // 실제 이미지 경로로 대체
+      alt: "icon",
+      text: "단백질 섭취하기",
+      days: 0,
+    },
+  ]);
+
+  const [todos, setTodos] = useState({});
   const { totalTodosCount, completed100Count, maxStreak } =
     calculateTodoStats(todos);
 
   const { weekCalendarList, currentDate, goToPreviousMonth, goToNextMonth } =
     useCalendar();
   const carouselRef = useRef(null);
-
   const scrollLeft = () => {
     if (carouselRef.current) {
       carouselRef.current.scrollBy({ left: -300, behavior: "smooth" });
@@ -57,6 +155,10 @@ const MonthlyStat = ({ csrfToken }) => {
     }
   };
 
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1;
+
   useEffect(() => {
     const token = Cookies.get("csrftoken"); // 쿠키에서 CSRF 토큰을 가져옵니다.
     if (token) {
@@ -65,106 +167,48 @@ const MonthlyStat = ({ csrfToken }) => {
     }
   }, []);
 
-  const top = [
-    {
-      className: "fruit",
-      imgSrc: `${과일}`, // 실제 이미지 경로로 대체
-      alt: "icon",
-      text: "과일 섭취하기",
-      days: 12,
-    },
-    {
-      className: "muscle",
-      imgSrc: `${근력}`, // 실제 이미지 경로로 대체
-      alt: "icon",
-      text: "근력 운동하기",
-      days: 11,
-    },
-    {
-      className: "walk",
-      imgSrc: `${산책}`, // 실제 이미지 경로로 대체
-      alt: "icon",
-      text: "30분 산책하기",
-      days: 9,
-    },
-    {
-      className: "sleep",
-      imgSrc: `${취침}`, // 실제 이미지 경로로 대체
-      alt: "icon",
-      text: "7시간 이상 취침하기",
-      days: 5,
-    },
-    {
-      className: "bath",
-      imgSrc: `${목욕}`, // 실제 이미지 경로로 대체
-      alt: "icon",
-      text: "목욕하기",
-      days: 8,
-    },
-    {
-      className: "salad",
-      imgSrc: `${샐러드}`, // 실제 이미지 경로로 대체
-      alt: "icon",
-      text: "한 끼 샐러드 먹기",
-      days: 9,
-    },
-    {
-      className: "water",
-      imgSrc: `${물}`, // 실제 이미지 경로로 대체
-      alt: "icon",
-      text: "5분동안 명상하기",
-      days: 8,
-    },
-    {
-      className: "meditation",
-      imgSrc: `${명상}`, // 실제 이미지 경로로 대체
-      alt: "icon",
-      text: "5분동안 명상하기",
-      days: 6,
-    },
-    {
-      className: "massage",
-      imgSrc: `${마사지}`, // 실제 이미지 경로로 대체
-      alt: "icon",
-      text: "혈액순환 마사지하기",
-      days: 7,
-    },
-    {
-      className: "fermentation",
-      imgSrc: `${발효식품}`, // 실제 이미지 경로로 대체
-      alt: "icon",
-      text: "발효식품 먹기",
-      days: 7,
-    },
-    {
-      className: "stretching",
-      imgSrc: `${스트레칭}`, // 실제 이미지 경로로 대체
-      alt: "icon",
-      text: "스트레칭하기",
-      days: 6,
-    },
-    {
-      className: "nuts",
-      imgSrc: `${견과류}`, // 실제 이미지 경로로 대체
-      alt: "icon",
-      text: "견과류 섭취하기",
-      days: 6,
-    },
-    {
-      className: "eat",
-      imgSrc: `${식사}`, // 실제 이미지 경로로 대체
-      alt: "icon",
-      text: "하루 3끼 식사하기",
-      days: 7,
-    },
-    {
-      className: "protein",
-      imgSrc: `${단백질}`, // 실제 이미지 경로로 대체
-      alt: "icon",
-      text: "단백질 먹기",
-      days: 10,
-    },
-  ];
+  useEffect(() => {
+    const fetchTodosAndCounts = async () => {
+      try {
+        const userId = localStorage.getItem("userid");
+        const curDate = localStorage.getItem("loginat");
+
+        // Fetch user todos
+        const todosResponse = await axios.get(`${URL}/read-user-todo/`, {
+          withCredentials: true,
+          headers: { "X-User-Id": userId },
+          params: { date: curDate },
+        });
+
+        // Fetch counts
+        const countsResponse = await axios.get(`${URL}/calendar/cnt/all/`, {
+          withCredentials: true,
+          headers: { "X-User-Id": userId },
+        });
+
+        const userTodos = todosResponse.data.user_todo.length;
+        const counts = countsResponse.data.data_count;
+
+        // Process data to create todos object
+        const processedTodos = counts.reduce((acc, { date, count }) => {
+          const percentage = (count / userTodos) * 100;
+          let status;
+          if (percentage === 100) status = 100;
+          else if (percentage >= 50) status = 50;
+          else if (percentage >= 10) status = 10;
+          else status = 0;
+          acc[date] = status;
+          return acc;
+        }, {});
+
+        setTodos(processedTodos);
+      } catch (error) {
+        console.error("Error fetching todos and counts:", error);
+      }
+    };
+
+    fetchTodosAndCounts();
+  }, []);
 
   return (
     <div className="Monthly-back">
@@ -217,75 +261,145 @@ const MonthlyStat = ({ csrfToken }) => {
         <div className="activity-steps-container">
           <div className="activity-steps">
             <div className="activity-step">
-              <div className="calendar-small">
+              <div className="calendar-small fruit">
                 <span>야채주스 마시기</span>
                 <img src={과일} alt="icon" />
-                <SmallCalendar weekCalendarList={weekCalendarList} />
+                <SmallCalendar
+                  weekCalendarList={weekCalendarList}
+                  activityName="야채주스 마시기"
+                  userId={localStorage.getItem("userid")}
+                  url={URL}
+                />
               </div>
-              <div className="calendar-small">
+              <div className="calendar-small gym">
                 <span>근력 운동하기</span>
                 <img src={근력} alt="icon" />
-                <SmallCalendar weekCalendarList={weekCalendarList} />
+                <SmallCalendar
+                  weekCalendarList={weekCalendarList}
+                  activityName="근력 운동하기"
+                  userId={localStorage.getItem("userid")}
+                  url={URL}
+                />
               </div>
-              <div className="calendar-small">
-                <span>30분 산책하기</span>
+              <div className="calendar-small walk">
+                <span>유산소 운동하기</span>
                 <img src={산책} alt="icon" />
-                <SmallCalendar weekCalendarList={weekCalendarList} />
+                <SmallCalendar
+                  weekCalendarList={weekCalendarList}
+                  activityName="유산소 운동하기"
+                  userId={localStorage.getItem("userid")}
+                  url={URL}
+                />
               </div>
               <div className="calendar-small sleep">
-                <span>7시간 이상 취침하기</span>
+                <span>7시간 이상 잠자기</span>
                 <img src={취침} alt="icon" />
-                <SmallCalendar weekCalendarList={weekCalendarList} />
+                <SmallCalendar
+                  weekCalendarList={weekCalendarList}
+                  activityName="7시간 이상 잠자기"
+                  userId={localStorage.getItem("userid")}
+                  url={URL}
+                />
               </div>
               <div className="calendar-small noal">
                 <span>목욕하기</span>
                 <img src={목욕} alt="icon" />
-                <SmallCalendar weekCalendarList={weekCalendarList} />
+                <SmallCalendar
+                  weekCalendarList={weekCalendarList}
+                  activityName="목욕하기"
+                  userId={localStorage.getItem("userid")}
+                  url={URL}
+                />
               </div>
               <div className="calendar-small salad">
-                <span>한 끼 샐러드 먹기</span>
+                <span>샐러드 먹기</span>
                 <img src={샐러드} alt="icon" />
-                <SmallCalendar weekCalendarList={weekCalendarList} />
+                <SmallCalendar
+                  weekCalendarList={weekCalendarList}
+                  activityName="샐러드 먹기"
+                  userId={localStorage.getItem("userid")}
+                  url={URL}
+                />
               </div>
               <div className="calendar-small water">
-                <span>물 8컵 먹기</span>
+                <span>물 8컵 마시기</span>
                 <img src={물} alt="icon" />
-                <SmallCalendar weekCalendarList={weekCalendarList} />
+                <SmallCalendar
+                  weekCalendarList={weekCalendarList}
+                  activityName="물 8컵 마시기"
+                  userId={localStorage.getItem("userid")}
+                  url={URL}
+                />
               </div>
               <div className="calendar-small meditation">
-                <span>5분동안 명상하기</span>
+                <span>명상하기</span>
                 <img src={명상} alt="icon" />
-                <SmallCalendar weekCalendarList={weekCalendarList} />
+                <SmallCalendar
+                  weekCalendarList={weekCalendarList}
+                  activityName="명상하기"
+                  userId={localStorage.getItem("userid")}
+                  url={URL}
+                />
               </div>
               <div className="calendar-small massage">
-                <span>혈액순환 마사지하기</span>
+                <span>마사지하기</span>
                 <img src={마사지} alt="icon" />
-                <SmallCalendar weekCalendarList={weekCalendarList} />
+                <SmallCalendar
+                  weekCalendarList={weekCalendarList}
+                  activityName="마사지하기"
+                  userId={localStorage.getItem("userid")}
+                  url={URL}
+                />
               </div>
               <div className="calendar-small fastfood">
-                <span>발효식품 먹기</span>
+                <span>발효식품 섭취하기</span>
                 <img src={발효식품} alt="icon" />
-                <SmallCalendar weekCalendarList={weekCalendarList} />
+                <SmallCalendar
+                  weekCalendarList={weekCalendarList}
+                  activityName="발효식품 섭취하기"
+                  userId={localStorage.getItem("userid")}
+                  url={URL}
+                />
               </div>
               <div className="calendar-small stretching">
-                <span>스트레칭하기</span>
+                <span>스트레칭 하기</span>
                 <img src={스트레칭} alt="icon" />
-                <SmallCalendar weekCalendarList={weekCalendarList} />
+                <SmallCalendar
+                  weekCalendarList={weekCalendarList}
+                  activityName="스트레칭 하기"
+                  userId={localStorage.getItem("userid")}
+                  url={URL}
+                />
               </div>
               <div className="calendar-small nuts">
                 <span>견과류 섭취하기</span>
                 <img src={견과류} alt="icon" />
-                <SmallCalendar weekCalendarList={weekCalendarList} />
+                <SmallCalendar
+                  weekCalendarList={weekCalendarList}
+                  activityName="견과류 섭취하기"
+                  userId={localStorage.getItem("userid")}
+                  url={URL}
+                />
               </div>
               <div className="calendar-small meal">
-                <span>하루 3끼 식사하기</span>
+                <span>아침 식사하기</span>
                 <img src={식사} alt="icon" />
-                <SmallCalendar weekCalendarList={weekCalendarList} />
+                <SmallCalendar
+                  weekCalendarList={weekCalendarList}
+                  activityName="아침 식사하기"
+                  userId={localStorage.getItem("userid")}
+                  url={URL}
+                />
               </div>
               <div className="calendar-small coffee">
-                <span>단백질 먹기</span>
+                <span>단백질 섭취하기</span>
                 <img src={단백질} alt="icon" />
-                <SmallCalendar weekCalendarList={weekCalendarList} />
+                <SmallCalendar
+                  weekCalendarList={weekCalendarList}
+                  activityName="단백질 섭취하기"
+                  userId={localStorage.getItem("userid")}
+                  url={URL}
+                />
               </div>
             </div>
           </div>
@@ -303,7 +417,7 @@ const MonthlyStat = ({ csrfToken }) => {
 
         <div className="top-activity-wrapper">
           <div className="top-activity">
-            {top
+            {topActivities
               .sort((a, b) => b.days - a.days)
               .slice(0, 3)
               .map((activity, index) => (

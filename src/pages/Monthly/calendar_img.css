@@ -1,3 +1,23 @@
+.calendar-small.fruit img {
+  position: relative;
+  width: 17%;
+  top: 10%;
+  left: -38%;
+}
+
+.calendar-small.walk img {
+  position: relative;
+  width: 14%;
+  top: 8%;
+  left: -30%;
+}
+
+.calendar-small.walk span {
+  top: -5%;
+  left: 29%;
+  font-size: 30px;
+}
+
 .calendar-small.sleep img {
   position: relative;
   width: 20%;
@@ -27,7 +47,12 @@
   position: relative;
   width: 20%;
   top: 8%;
-  left: -40%;
+  left: -25%;
+}
+
+.calendar-small.salad span {
+  top: -5%;
+  left: 37%;
 }
 
 .calendar-small.water span {
@@ -39,19 +64,19 @@
   position: relative;
   width: 20%;
   top: 8%;
-  left: -25%;
+  left: -30%;
 }
 
 .calendar-small.meditation img {
   position: relative;
   width: 20%;
-  top: 8%;
-  left: -42%;
+  top: 5%;
+  left: -15%;
 }
 
 .calendar-small.meditation span {
   top: -5%;
-  left: 30%;
+  left: 40%;
   font-size: 30px;
 }
 
@@ -59,12 +84,12 @@
   position: relative;
   width: 20%;
   top: 8%;
-  left: -51%;
+  left: -20%;
 }
 
 .calendar-small.massage span {
   top: -5%;
-  left: 27%;
+  left: 40%;
   font-size: 30px;
 }
 
@@ -72,12 +97,18 @@
   position: relative;
   width: 20%;
   top: 8%;
-  left: -30%;
+  left: -40%;
 }
 
 .calendar-small.fastfood span {
   top: -5%;
-  left: 36%;
+  left: 32%;
+  font-size: 30px;
+}
+
+.calendar-small.stretching span {
+  top: -5%;
+  left: 37%;
   font-size: 30px;
 }
 
@@ -97,7 +128,7 @@
 
 .calendar-small.meal span {
   top: -5%;
-  left: 29%;
+  left: 37%;
   font-size: 30px;
 }
 
@@ -105,12 +136,12 @@
   position: relative;
   width: 20%;
   top: 8%;
-  left: -45%;
+  left: -30%;
 }
 
 .calendar-small.coffee span {
   top: -5%;
-  left: 40%;
+  left: 36%;
   font-size: 30px;
 }
 
@@ -118,5 +149,5 @@
   position: relative;
   width: 20%;
   top: 8%;
-  left: -20%;
+  left: -33%;
 }
