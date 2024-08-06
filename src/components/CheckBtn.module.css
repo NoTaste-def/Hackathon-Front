@@ -18,7 +18,7 @@
   border: 3px solid #0090f4;
 }
 .checked::after {
-  content: url("../image/btn/체크2.png");
+  content: url("/src/image/btn/체크2.png");
   position: absolute;
   z-index: 100;
   transform: translate(-200%, -260%);
@@ -26,7 +26,7 @@
   animation: appear_after 0.3s forwards;
 }
 .checked::before {
-  content: url("../image/btn/체크.png");
+  content: url("/src/image/btn/체크.png");
   position: absolute;
   z-index: 100;
   transform: translate(-100%, -100%);
