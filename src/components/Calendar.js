@@ -32,13 +32,9 @@ const Calendar = ({
   return (
     <div className="calendar-container">
       <div className="title">
-        <button className="nav-button" onClick={goToPreviousMonth}>
-          &lt;
-        </button>
-        <h1>{currentDate.getMonth() + 1}월</h1>
-        <button className="nav-button" onClick={goToNextMonth}>
-          &gt;
-        </button>
+        <button className="nav-button" onClick={goToPreviousMonth}></button>
+        <h1 className="nav-month">{currentDate.getMonth() + 1}월</h1>
+        <button className="nav-button" onClick={goToNextMonth}></button>
       </div>
       <div className="calendar">
         <table>

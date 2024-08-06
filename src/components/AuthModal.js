@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
+import close from "../image/btn/close.png";
+import "./AuthModal.css";
 
 const URL =
   "https://port-0-likelion-hackathon-lxmynpl6f586b2fd.sel5.cloudtype.app";
@@ -102,7 +104,7 @@ const AuthModal = ({
           className={type === "login" ? "close-button" : "SignUp_close-button"}
           onClick={onClose}
         >
-          x
+          <img className="close_Button" src={close} alt="logo" />
         </button>
         <h2>{type === "login" ? "회원 로그인" : "회원가입"}</h2>
         <form onSubmit={handleFormSubmit} className="form_container">
