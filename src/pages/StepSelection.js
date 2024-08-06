@@ -66,6 +66,7 @@ const StepSelection = ({ selec, setSelec, csrfToken, setCsrfToken }) => {
   const handleSubmit = async () => {
     try {
       const userId = localStorage.getItem("userid");
+      const curDate = localStorage.getItem("loginat");
 
       if (!userId) {
         throw new Error("User ID not found in local storage");
@@ -73,7 +74,7 @@ const StepSelection = ({ selec, setSelec, csrfToken, setCsrfToken }) => {
 
       const response = await axios.post(
         `${URL}/save-user-todo/`,
-        { user_todo: selec },
+        { user_todo: selec, date: curDate },
         {
           withCredentials: true,
           headers: {
@@ -94,15 +95,24 @@ const StepSelection = ({ selec, setSelec, csrfToken, setCsrfToken }) => {
     const fetchData = async () => {
       try {
         const userId = localStorage.getItem("userid");
+        const curDate = localStorage.getItem("loginat");
 
         if (!userId) {
           throw new Error("User ID not found in local storage");
         }
 
-        const response = await axios.get(`${URL}/read-user-todo/`, {
-          withCredentials: true,
-          headers: { "X-User-Id": userId },
-        });
+        const response = await axios.get(
+          `${URL}/read-user-todo/`,
+          {
+            withCredentials: true,
+            headers: { "X-User-Id": userId },
+          },
+          {
+            params: {
+              date: curDate,
+            },
+          }
+        );
 
         // Extract user_todo items from the response
         const userTodos = response.data.flatMap((item) => item.user_todo);

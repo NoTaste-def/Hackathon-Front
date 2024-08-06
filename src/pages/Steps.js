@@ -64,6 +64,7 @@ const Steps = ({ selec, csrfToken, setCsrfToken }) => {
 
   useEffect(() => {
     const userId = localStorage.getItem("userid");
+    const curDate = localStorage.getItem("loginat");
 
     if (!userId) {
       throw new Error("User ID not found in local storage");
@@ -74,6 +75,9 @@ const Steps = ({ selec, csrfToken, setCsrfToken }) => {
         const response = await axios.get(`${URL}/read-user-todo/`, {
           withCredentials: true,
           headers: { "X-User-Id": userId },
+          params: {
+            date: curDate,
+          },
         });
 
         console.log(response.data);
